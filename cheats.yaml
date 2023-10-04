@@ -1,0 +1,10 @@
+sections:
+- title: Types
+  cheats:
+  - title: Strings
+    link: https://www.openpolicyagent.org/docs/latest/policy-language/#strings
+
+- title: Rules
+  cheats:
+  - title: Constants
+    link: https://www.openpolicyagent.org/docs/latest/policy-reference/#constants

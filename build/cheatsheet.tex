@@ -1,0 +1,211 @@
+\documentclass[twocolumn]{article}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+\geometry{margin=20pt}
+\setlength{\columnsep}{20pt}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.98,0.98,0.95}
+
+\makeatletter
+\renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+  \textbf{\LARGE{\@title}}
+}
+\makeatother
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=none,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\begin{document}
+\title{Rego Style Guide}
+
+\maketitle
+\vspace{-1em}
+
+
+\section*{Types}
+
+
+
+
+\vspace{-1em}
+\subsubsection*{Strings}
+
+\begin{lstlisting}[language=Ruby]
+string := "hello rego!"
+complicated_string := `new\nline\n...wow`
+\end{lstlisting}
+
+
+
+
+
+\vspace{-1em}
+\subsubsection*{Numbers}
+
+\begin{lstlisting}[language=Ruby]
+number := 1
+also_number := 3.14
+\end{lstlisting}
+
+
+
+
+
+\vspace{-1em}
+\subsubsection*{Arrays}
+
+\begin{lstlisting}[language=Ruby]
+array := [1,2,"three",null]
+\end{lstlisting}
+
+
+
+
+
+\vspace{-1em}
+\subsubsection*{Sets}
+
+\begin{lstlisting}[language=Ruby]
+set := {1,2,1}
+
+equal := {1,2,1} == {1,2}
+\end{lstlisting}
+
+
+
+
+
+\vspace{-1em}
+\subsubsection*{Objects}
+
+\begin{lstlisting}[language=Ruby]
+object := {
+  "key": true,
+  "foo": "bar",
+}
+
+nested_object := {
+  "bird": {
+    "nest": [ "egg" ]
+  },
+}
+\end{lstlisting}
+
+
+
+
+
+
+\section*{Comprehensions}
+
+
+\textbf{\tiny{(Shared Code)}}
+\begin{lstlisting}[language=Ruby]
+letters := ["q", "w", "i", "e", "r", "t", "y", "u", "i", " e", "y"]
+vowels := ["a", "e", "i", "o", "u", "y"]
+\end{lstlisting}
+
+
+
+\vspace{-1em}
+\subsubsection*{Arrays}
+
+\begin{lstlisting}[language=Ruby]
+array_match_vowels := [match |
+  some letter in letters
+  some vowel in vowels
+  letter == vowel
+  match := letter
+]
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{
+  "array_match_vowels": [
+    "i", "e", "y", "u", "i", "e", "y"
+  ]
+}
+
+\end{lstlisting}
+
+
+
+\vspace{-1em}
+\subsubsection*{Sets}
+
+\begin{lstlisting}[language=Ruby]
+set_match_vowels := {match |
+  some letter in letters
+  some vowel in vowels
+  letter == vowel
+  match := letter
+}
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{
+  "set_match_vowels": [
+    "e", "i", "u", "y"
+  ]
+}
+
+\end{lstlisting}
+
+
+
+\vspace{-1em}
+\subsubsection*{Objects}
+
+\begin{lstlisting}[language=Ruby]
+object_check_vowels := {letter: is_vowel |
+  some letter in letters
+  is_vowel := letter in vowels
+}
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{
+  "object_check_vowels": {
+    "e": true, "i": true, "q": false, "r": false, "t": false, "u": true, "w": false, "y": true
+  }
+}
+
+\end{lstlisting}
+
+
+
+
+
+\end{document}

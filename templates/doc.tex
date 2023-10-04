@@ -1,0 +1,76 @@
+\documentclass[twocolumn]{article}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+\geometry{margin=20pt}
+\setlength{\columnsep}{20pt}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.98,0.98,0.95}
+
+\makeatletter
+\renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+  \textbf{\LARGE{\@title}}
+}
+\makeatother
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=none,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\begin{document}
+\title{Rego Style Guide}
+
+\maketitle
+\vspace{-1em}
+
+{{ range .Sections }}
+\section*{{ "{" }}{{ .Title }}{{ "}" }}
+
+{{ if ne .Shared "" }}
+\textbf{\tiny{(Shared Code)}}
+\begin{lstlisting}[language=Ruby]
+{{ .Shared }}
+\end{lstlisting}
+{{ end }}
+
+{{ range .Cheats }}
+\vspace{-1em}
+\subsubsection*{{ "{" }}{{ .Title }}{{ "}" }}
+
+\begin{lstlisting}[language=Ruby]
+{{ .BodyTex }}
+\end{lstlisting}
+
+
+{{ if ne .Output "" }}
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{{ .Output }}
+\end{lstlisting}
+{{ end }}
+
+{{ end }}
+{{ end }}
+
+\end{document}
