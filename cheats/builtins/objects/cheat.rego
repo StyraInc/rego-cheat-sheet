@@ -1,6 +1,6 @@
-package play
+package cheat
 
-import future.keywords.if
+import future.keywords
 
 obj := {"userid": "18472", "roles": [{"name": "admin"}]}
 

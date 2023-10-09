@@ -1,6 +1,6 @@
-package play
+package cheat
 
-import future.keywords.if
+import future.keywords
 
 vals := [5,1,4,2,3]
 

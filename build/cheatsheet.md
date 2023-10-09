@@ -14,8 +14,6 @@ Complete rules assign a single value.
 
 
 ```rego
-import future.keywords
-
 default allow := false
 allow if {
 	input.user.role == "admin"
@@ -37,8 +35,6 @@ Partial rules generate and assign a set of values to a variable.
 
 
 ```rego
-import future.keywords
-
 paths contains path if {
 	path := "/handbook/*"
 }
@@ -75,8 +71,6 @@ Name local query variables.
 
 
 ```rego
-import future.keywords
-
 all_regions := {
 	"emea": {"west", "east"},
 	"na": {"west", "east", "central"},
@@ -111,8 +105,6 @@ Apply conditions to many elements.
 
 
 ```rego
-import future.keywords
-
 allow if {
 	required_prefix := sprintf("/docs/%s/", [input.userID])
 	every path in input.paths {
@@ -137,8 +129,6 @@ Statements in rules are 'anded' together.
 
 
 ```rego
-import future.keywords
-
 valid_staff_email if {
 	regex.match(`^\S+@\S+\.\S+$`, input.email)
 
@@ -156,8 +146,6 @@ Express OR with multiple rules, functions or the in keyword.
 
 
 ```rego
-import future.keywords
-
 # using multiple rules
 valid_email if endswith(input.email, "@example.com")
 valid_email if endswith(input.email, "@test.example.com")
@@ -192,8 +180,6 @@ Override input and data using the with keyword.
 
 
 ```rego
-import future.keywords
-
 allow if {
 	input.admin == true
 }
@@ -219,8 +205,6 @@ Use print in rules to inspect values at runtime.
 
 
 ```rego
-import future.keywords
-
 allowed_users := {"alice", "bob", "charlie"}
 
 allow if {
@@ -252,10 +236,6 @@ allow if {
 
 
 ```rego
-package play
-
-import future.keywords.if
-
 vals := [5,1,4,2,3]
 
 vals_count := count(vals)
@@ -284,10 +264,6 @@ vals_sum := sum(vals)
 
 
 ```rego
-package play
-
-import future.keywords.if
-
 obj := {"userid": "18472", "roles": [{"name": "admin"}]}
 
 val := object.get(obj, ["roles", 0, "name"], "missing")
@@ -317,10 +293,6 @@ keys := object.keys(obj)
 
 
 ```rego
-package play
-
-import future.keywords.if
-
 example_string := "Build Policy as Code with OPA!"
 
 check_contains if contains(example_string, "OPA")
@@ -349,14 +321,9 @@ check_sprintf := sprintf("OPA is %s!", ["awesome"])
 
 
 ```rego
-package play
-
-import future.keywords.if
-
 example_string := "Build Policy as Code with OPA!"
 
 check_match if regex.match(`\w+`, example_string)
-
 check_replace := regex.replace(example_string, `\s+`, "_")
 ```
 
@@ -367,115 +334,6 @@ check_replace := regex.replace(example_string, `\s+`, "_")
   "check_match": true,
   "check_replace": "Build_Policy_as_Code_with_OPA!"
 }
-```
-
-
-
-
-## Comprehensions
-
-
-_(Shared Code)_
-```rego
-letters := ["q", "w", "i", "e", "r", "t", "y", "u", "i", " e", "y"]
-vowels := ["a", "e", "i", "o", "u", "y"]
-```
-
-
-
-### Arrays
-
-
-
-```rego
-array_match_vowels := [match |
-  some letter in letters
-  some vowel in vowels
-  letter == vowel
-  match := letter
-]
-```
-
-
-```javascript
-// Output
-{
-  "array_match_vowels": [
-    "i", "e", "y", "u", "i", "e", "y"
-  ]
-}
-
-```
-
-
-
-### Sets
-
-
-
-```rego
-set_match_vowels := {match |
-  some letter in letters
-  some vowel in vowels
-  letter == vowel
-  match := letter
-}
-```
-
-
-```javascript
-// Output
-{
-  "set_match_vowels": [
-    "e", "i", "u", "y"
-  ]
-}
-
-```
-
-
-
-### Objects
-
-
-
-```rego
-object_check_vowels := {letter: is_vowel |
-  some letter in letters
-  is_vowel := letter in vowels
-}
-```
-
-
-```javascript
-// Output
-{
-  "object_check_vowels": {
-    "e": true, "i": true, "q": false, "r": false, "t": false, "u": true, "w": false, "y": true
-  }
-}
-
-```
-
-
-
-
-
-= {letter: is_vowel |
-  some letter in letters
-  is_vowel := letter in vowels
-}
-```
-
-
-```javascript
-// Output
-{
-  "object_check_vowels": {
-    "e": true, "i": true, "q": false, "r": false, "t": false, "u": true, "w": false, "y": true
-  }
-}
-
 ```
 
 

@@ -1,6 +1,6 @@
-package play
+package cheat
 
-import future.keywords.if
+import future.keywords
 
 example_string := "Build Policy as Code with OPA!"
 

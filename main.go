@@ -77,9 +77,10 @@ func main() {
 				panic(err)
 			}
 
-			cheat.Code = strings.TrimSpace(strings.Replace(
-				string(cheatCodeBs), "package cheat", "", 1,
-			))
+			cheat.Code = string(cheatCodeBs)
+			cheat.Code = strings.Replace(cheat.Code, "package cheat", "", 1)
+			cheat.Code = strings.Replace(cheat.Code, "import future.keywords", "", 1)
+			cheat.Code = strings.TrimSpace(cheat.Code)
 
 			cheatOutputPath := filepath.Join("cheats", sectionDir.Name(), cheatDir.Name(), "output.json")
 			if _, err = os.Stat(cheatOutputPath); !os.IsNotExist(err) {
@@ -153,11 +154,15 @@ func main() {
 	}
 
 	mdOutputPath := "build/cheatsheet.md"
-	if _, err = os.Stat(mdOutputPath); os.IsNotExist(err) {
-		_, err = os.Create(mdOutputPath)
+	if _, err = os.Stat(mdOutputPath); !os.IsNotExist(err) {
+		err = os.Remove(mdOutputPath)
 		if err != nil {
 			panic(err)
 		}
+	}
+	_, err = os.Create(mdOutputPath)
+	if err != nil {
+		panic(err)
 	}
 
 	mdOutputFile, err := os.OpenFile(mdOutputPath, os.O_RDWR, 0644)

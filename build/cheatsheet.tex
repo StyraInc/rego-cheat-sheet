@@ -54,8 +54,6 @@
 \subsubsection*{Complete}
 
 \begin{lstlisting}[language=Ruby]
-import future.keywords
-
 default allow := false
 allow if {
 	input.user.role == "admin"
@@ -75,8 +73,6 @@ request_quota := 50 if input.user.plan.trial
 \subsubsection*{Partial}
 
 \begin{lstlisting}[language=Ruby]
-import future.keywords
-
 paths contains path if {
 	path := "/handbook/*"
 }
@@ -111,8 +107,6 @@ paths contains path if {
 \subsubsection*{Some}
 
 \begin{lstlisting}[language=Ruby]
-import future.keywords
-
 all_regions := {
 	"emea": {"west", "east"},
 	"na": {"west", "east", "central"},
@@ -145,8 +139,6 @@ allowed_regions contains region_id if {
 \subsubsection*{Every}
 
 \begin{lstlisting}[language=Ruby]
-import future.keywords
-
 allow if {
 	required_prefix := sprintf("/docs/%s/", [input.userID])
 	every path in input.paths {
@@ -169,8 +161,6 @@ allow if {
 \subsubsection*{Logical And}
 
 \begin{lstlisting}[language=Ruby]
-import future.keywords
-
 valid_staff_email if {
 	regex.match(`^\S+@\S+\.\S+$`, input.email)
 
@@ -186,8 +176,6 @@ valid_staff_email if {
 \subsubsection*{Logical Or}
 
 \begin{lstlisting}[language=Ruby]
-import future.keywords
-
 # using multiple rules
 valid_email if endswith(input.email, "@example.com")
 valid_email if endswith(input.email, "@test.example.com")
@@ -220,8 +208,6 @@ valid_request if {
 \subsubsection*{With}
 
 \begin{lstlisting}[language=Ruby]
-import future.keywords
-
 allow if {
 	input.admin == true
 }
@@ -245,8 +231,6 @@ test_allow_when_admin if {
 \subsubsection*{Print}
 
 \begin{lstlisting}[language=Ruby]
-import future.keywords
-
 allowed_users := {"alice", "bob", "charlie"}
 
 allow if {
@@ -278,10 +262,6 @@ allow if {
 \subsubsection*{Aggregates}
 
 \begin{lstlisting}[language=Ruby]
-package play
-
-import future.keywords.if
-
 vals := [5,1,4,2,3]
 
 vals_count := count(vals)
@@ -310,10 +290,6 @@ vals_sum := sum(vals)
 \subsubsection*{Objects}
 
 \begin{lstlisting}[language=Ruby]
-package play
-
-import future.keywords.if
-
 obj := {"userid": "18472", "roles": [{"name": "admin"}]}
 
 val := object.get(obj, ["roles", 0, "name"], "missing")
@@ -343,10 +319,6 @@ keys := object.keys(obj)
 \subsubsection*{Strings}
 
 \begin{lstlisting}[language=Ruby]
-package play
-
-import future.keywords.if
-
 example_string := "Build Policy as Code with OPA!"
 
 check_contains if contains(example_string, "OPA")
@@ -375,14 +347,9 @@ check_sprintf := sprintf("OPA is %s!", ["awesome"])
 \subsubsection*{Regex}
 
 \begin{lstlisting}[language=Ruby]
-package play
-
-import future.keywords.if
-
 example_string := "Build Policy as Code with OPA!"
 
 check_match if regex.match(`\w+`, example_string)
-
 check_replace := regex.replace(example_string, `\s+`, "_")
 \end{lstlisting}
 
@@ -399,7 +366,45 @@ check_replace := regex.replace(example_string, `\s+`, "_")
 
 
 
-\section*{Comprehensions}
+
+\end{document}
++`, "_")
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{
+  "check_match": true,
+  "check_replace": "Build_Policy_as_Code_with_OPA!"
+}
+\end{lstlisting}
+
+
+
+
+
+\end{document}
+document}
+ck_match": true,
+  "check_replace": "Build_Policy_as_Code_with_OPA!"
+}
+\end{lstlisting}
+
+
+
+
+
+\end{document}
+ting}
+
+
+
+
+
+\end{document}
+ehensions}
 
 
 \textbf{\tiny{(Shared Code)}}
