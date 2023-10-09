@@ -1,10 +1,23 @@
 \documentclass[twocolumn]{article}
 \usepackage{geometry}
 \usepackage{listings}
+\usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{fancyhdr}
 
+\fancypagestyle{logo}{
+    \fancyhf{}
+    \fancyhead{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead[RE,RO]{\includegraphics[width=100pt]{logo.png}}}
 
-\geometry{margin=20pt}
+\geometry{
+    a4paper,
+    left=10mm,
+    right=10mm,
+    top=17mm,
+    bottom=10mm
+}
 \setlength{\columnsep}{20pt}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -14,7 +27,7 @@
 
 \makeatletter
 \renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
-  \textbf{\LARGE{\@title}}
+\textbf{\LARGE{\@title}}
 }
 \makeatother
 
@@ -39,10 +52,14 @@
 \lstset{style=mystyle}
 
 \begin{document}
+\pagestyle{logo}
 \title{Rego Style Guide}
 
 \maketitle
 \vspace{-1em}
+
+
+
 
 
 \section*{Rules}
@@ -94,6 +111,9 @@ paths contains path if {
   ]
 }
 \end{lstlisting}
+
+
+
 
 
 
@@ -152,6 +172,9 @@ allow if {
 
 
 
+
+
+
 \section*{Control Flow}
 
 
@@ -199,6 +222,9 @@ valid_request if {
 
 
 
+
+
+
 \section*{Testing}
 
 
@@ -216,6 +242,9 @@ test_allow_when_admin if {
 	allow with input as {"admin": true}
 }
 \end{lstlisting}
+
+
+
 
 
 
@@ -251,6 +280,11 @@ allow if {
 \end{lstlisting}
 
 
+
+
+
+
+\pagebreak
 
 
 \section*{Builtins}
@@ -368,35 +402,8 @@ check_replace := regex.replace(example_string, `\s+`, "_")
 
 
 \end{document}
-+`, "_")
-\end{lstlisting}
-
-
-
-\textbf{\tiny{(Output)}}
-\begin{lstlisting}[language=Ruby]
-{
-  "check_match": true,
-  "check_replace": "Build_Policy_as_Code_with_OPA!"
-}
-\end{lstlisting}
-
-
-
-
-
-\end{document}
-document}
-ck_match": true,
-  "check_replace": "Build_Policy_as_Code_with_OPA!"
-}
-\end{lstlisting}
-
-
-
-
-
-\end{document}
+t}
+cument}
 ting}
 
 

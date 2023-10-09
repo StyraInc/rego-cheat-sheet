@@ -11,10 +11,11 @@ import (
 )
 
 type Section struct {
-	Title  string `yaml:"title"`
-	Rank   int    `yaml:"rank"`
-	Shared string
-	Cheats []Cheat
+	Title     string `yaml:"title"`
+	Rank      int    `yaml:"rank"`
+	PageBreak bool   `yaml:"page_break"`
+	Shared    string
+	Cheats    []Cheat
 }
 
 type Cheat struct {
@@ -206,6 +207,30 @@ func main() {
 	}{Sections: sections})
 	if err != nil {
 		panic(err)
+	}
+
+	assets, err := os.ReadDir("assets")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, asset := range assets {
+		if asset.IsDir() {
+			panic("dir in assets, can't process")
+		}
+
+		targetPath := filepath.Join("build", asset.Name())
+		if _, err = os.Stat(targetPath); !os.IsNotExist(err) {
+			err = os.Remove(targetPath)
+			if err != nil {
+				panic(err)
+			}
+		}
+
+		err = os.Link(filepath.Join("assets", asset.Name()), targetPath)
+		if err != nil {
+			panic(err)
+		}
 	}
 
 }

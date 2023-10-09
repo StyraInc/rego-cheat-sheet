@@ -1,10 +1,23 @@
 \documentclass[twocolumn]{article}
 \usepackage{geometry}
 \usepackage{listings}
+\usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{fancyhdr}
 
+\fancypagestyle{logo}{
+    \fancyhf{}
+    \fancyhead{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead[RE,RO]{\includegraphics[width=100pt]{logo.png}}}
 
-\geometry{margin=20pt}
+\geometry{
+    a4paper,
+    left=10mm,
+    right=10mm,
+    top=17mm,
+    bottom=10mm
+}
 \setlength{\columnsep}{20pt}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -14,7 +27,7 @@
 
 \makeatletter
 \renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
-  \textbf{\LARGE{\@title}}
+\textbf{\LARGE{\@title}}
 }
 \makeatother
 
@@ -39,12 +52,18 @@
 \lstset{style=mystyle}
 
 \begin{document}
+\pagestyle{logo}
 \title{Rego Style Guide}
 
 \maketitle
 \vspace{-1em}
 
 {{ range .Sections }}
+
+{{ if .PageBreak }}
+\pagebreak
+{{ end}}
+
 \section*{{ "{" }}{{ .Title }}{{ "}" }}
 
 {{ if ne .Shared "" }}

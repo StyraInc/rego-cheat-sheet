@@ -5,4 +5,4 @@ build:
 
 .PHONY: watch
 watch:
-	find . | grep -v git | grep -v build | entr -c -r make build
+	find . | grep -v git | grep -v build | grep -v assets | entr -c -r make build
