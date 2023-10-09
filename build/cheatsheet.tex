@@ -160,6 +160,245 @@ allow if {
 
 
 
+\section*{Control Flow}
+
+
+
+
+\vspace{-1em}
+\subsubsection*{Logical And}
+
+\begin{lstlisting}[language=Ruby]
+import future.keywords
+
+valid_staff_email if {
+	regex.match(`^\S+@\S+\.\S+$`, input.email)
+
+	endswith(input.email, "example.com")
+}
+\end{lstlisting}
+
+
+
+
+
+\vspace{-1em}
+\subsubsection*{Logical Or}
+
+\begin{lstlisting}[language=Ruby]
+import future.keywords
+
+# using multiple rules
+valid_email if endswith(input.email, "@example.com")
+valid_email if endswith(input.email, "@test.example.com")
+valid_email if endswith(input.email, "@example.net")
+
+# using functions
+allowed_firstname(name) if name == "joe"
+allowed_firstname(name) if name == "jane"
+valid_name if {
+	allowed_firstname(input.name)
+}
+
+# using `in`
+valid_request if {
+	input.method in {"GET", "POST"}
+}
+\end{lstlisting}
+
+
+
+
+
+
+\section*{Testing}
+
+
+
+
+\vspace{-1em}
+\subsubsection*{With}
+
+\begin{lstlisting}[language=Ruby]
+import future.keywords
+
+allow if {
+	input.admin == true
+}
+
+test_allow_when_admin if {
+	allow with input as {"admin": true}
+}
+\end{lstlisting}
+
+
+
+
+
+
+\section*{Debugging}
+
+
+
+
+\vspace{-1em}
+\subsubsection*{Print}
+
+\begin{lstlisting}[language=Ruby]
+import future.keywords
+
+allowed_users := {"alice", "bob", "charlie"}
+
+allow if {
+	some user in allowed_users
+	print(user)
+	input.user == user
+}
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+// alice
+// bob
+// charlie
+
+\end{lstlisting}
+
+
+
+
+\section*{Builtins}
+
+
+
+
+\vspace{-1em}
+\subsubsection*{Aggregates}
+
+\begin{lstlisting}[language=Ruby]
+package play
+
+import future.keywords.if
+
+vals := [5,1,4,2,3]
+
+vals_count := count(vals)
+vals_max := max(vals)
+vals_min := min(vals)
+vals_sorted := sort(vals)
+vals_sum := sum(vals)
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{
+  "vals_count": 5,
+  "vals_max": 5,
+  "vals_min": 1,
+  "vals_sorted": [1, 2, 3, 4, 5],
+  "vals_sum": 15
+}
+\end{lstlisting}
+
+
+
+\vspace{-1em}
+\subsubsection*{Objects}
+
+\begin{lstlisting}[language=Ruby]
+package play
+
+import future.keywords.if
+
+obj := {"userid": "18472", "roles": [{"name": "admin"}]}
+
+val := object.get(obj, ["roles", 0, "name"], "missing")
+defaulted_val := object.get(obj, ["roles", 0, "permissions"], "unknown")
+
+keys := object.keys(obj)
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{
+  "val": "admin",
+  "defaulted_val": "unknown",
+
+  "keys": [
+    "roles",
+    "userid"
+  ]
+}
+\end{lstlisting}
+
+
+
+\vspace{-1em}
+\subsubsection*{Strings}
+
+\begin{lstlisting}[language=Ruby]
+package play
+
+import future.keywords.if
+
+example_string := "Build Policy as Code with OPA!"
+
+check_contains if contains(example_string, "OPA")
+check_startswith if startswith(example_string, "Build")
+check_endswith if endswith(example_string, "!")
+check_replace := replace(example_string, "OPA", "Styra")
+check_sprintf := sprintf("OPA is %s!", ["awesome"])
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{
+  "check_contains": true,
+  "check_startswith": true,
+  "check_endswith": true,
+  "check_replace": "Build Policy as Code with Styra!",
+  "check_sprintf": "OPA is awesome!"
+}
+\end{lstlisting}
+
+
+
+\vspace{-1em}
+\subsubsection*{Regex}
+
+\begin{lstlisting}[language=Ruby]
+package play
+
+import future.keywords.if
+
+example_string := "Build Policy as Code with OPA!"
+
+check_match if regex.match(`\w+`, example_string)
+
+check_replace := regex.replace(example_string, `\s+`, "_")
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{
+  "check_match": true,
+  "check_replace": "Build_Policy_as_Code_with_OPA!"
+}
+\end{lstlisting}
+
+
+
+
 \section*{Comprehensions}
 
 
@@ -250,7 +489,16 @@ object_check_vowels := {letter: is_vowel |
 
 
 \end{document}
-eck_vowels": {
+
+}
+\end{lstlisting}
+
+
+
+\textbf{\tiny{(Output)}}
+\begin{lstlisting}[language=Ruby]
+{
+  "object_check_vowels": {
     "e": true, "i": true, "q": false, "r": false, "t": false, "u": true, "w": false, "y": true
   }
 }
@@ -262,5 +510,3 @@ eck_vowels": {
 
 
 \end{document}
-ment}
-ent}

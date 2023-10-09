@@ -1,0 +1,1 @@
+Statements in rules are 'anded' together.

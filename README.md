@@ -43,13 +43,3 @@ cheats
         ├── cheat.rego
         └── cheat.yaml
 ```
-
-
-## TODO
-
-- [x] rules (complete and partial)
-- [x] iteration — some, every
-- [ ] “control flow” (“How to express or” compressed)
-- [ ] testing — with
-- [ ] debugging — print
-- [ ] most commonly used built-in functions

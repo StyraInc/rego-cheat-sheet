@@ -1,0 +1,9 @@
+{
+  "val": "admin",
+  "defaulted_val": "unknown",
+
+  "keys": [
+    "roles",
+    "userid"
+  ]
+}
