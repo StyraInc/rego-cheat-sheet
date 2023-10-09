@@ -21,6 +21,7 @@ type Cheat struct {
 	Title  string `yaml:"title"`
 	Link   string `yaml:"link"`
 	Rank   int    `yaml:"rank"`
+	Text   string
 	Output string
 	Code   string
 }
@@ -88,6 +89,16 @@ func main() {
 				}
 
 				cheat.Output = string(cheatOutputBs)
+			}
+
+			cheatTextPath := filepath.Join("cheats", sectionDir.Name(), cheatDir.Name(), "cheat.txt")
+			if _, err = os.Stat(cheatTextPath); !os.IsNotExist(err) {
+				cheatTextBs, err := os.ReadFile(cheatTextPath)
+				if err != nil {
+					panic(err)
+				}
+
+				cheat.Text = string(cheatTextBs)
 			}
 
 			cheats = append(cheats, cheat)

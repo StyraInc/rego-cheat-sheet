@@ -1,0 +1,5 @@
+{
+  "allowed_regions": [
+    "apac_north", "apac_south", "emea_east", ...
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "paths": [
+    "/handbook/*",
+    "/teams/owl/*", "/teams/tiger/*"
+  ]
+}

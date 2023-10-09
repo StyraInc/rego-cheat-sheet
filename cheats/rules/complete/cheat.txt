@@ -1,0 +1,1 @@
+Complete rules assign a single value. 

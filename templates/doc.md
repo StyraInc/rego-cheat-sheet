@@ -11,15 +11,19 @@ _(Shared Code)_
 {{ end }}
 
 {{ range .Cheats }}
-## {{ .Title }}
+### {{ .Title }}
+
+{{ if ne .Text "" }}
+{{ .Text }}
+{{ end }}
 
 ```rego
 {{ .BodyTex }}
 ```
 
 {{ if ne .Output "" }}
-_(Output)_
-```json
+```javascript
+// Output
 {{ .Output }}
 ```
 {{ end }}
