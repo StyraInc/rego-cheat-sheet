@@ -1,4 +1,4 @@
-# Rego Style Guide
+# Rego Cheat Sheet
 
 
 ## Rules
