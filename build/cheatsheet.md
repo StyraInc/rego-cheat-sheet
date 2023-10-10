@@ -15,12 +15,14 @@ Complete rules assign a single value.
 
 ```rego
 default allow := false
+
 allow if {
 	input.user.role == "admin"
 	input.user.internal
 }
 
 default request_quota := 100
+
 request_quota := 1000 if input.user.internal
 request_quota := 50 if input.user.plan.trial
 ```
@@ -154,6 +156,7 @@ valid_email if endswith(input.email, "@example.net")
 # using functions
 allowed_firstname(name) if name == "joe"
 allowed_firstname(name) if name == "jane"
+
 valid_name if {
 	allowed_firstname(input.name)
 }
@@ -236,7 +239,7 @@ allow if {
 
 
 ```rego
-vals := [5,1,4,2,3]
+vals := [5, 1, 4, 2, 3]
 
 vals_count := count(vals)
 vals_max := max(vals)
@@ -324,6 +327,7 @@ check_sprintf := sprintf("OPA is %s!", ["awesome"])
 example_string := "Build Policy as Code with OPA!"
 
 check_match if regex.match(`\w+`, example_string)
+
 check_replace := regex.replace(example_string, `\s+`, "_")
 ```
 

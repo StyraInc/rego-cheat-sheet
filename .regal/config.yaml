@@ -1,0 +1,29 @@
+rules:
+  idiomatic:
+    no-defined-entrypoint:
+      level: ignore
+  imports:
+    implicit-future-keywords:
+      level: ignore
+  style:
+    opa-fmt:
+      ignore:
+        files:
+          - cheats/builtins/aggregates/cheat.rego
+          - cheats/builtins/objects/cheat.rego
+          - cheats/builtins/strings/cheat.rego
+          - cheats/control_flow/or/cheat.rego
+          - cheats/rules/complete/cheat.rego
+  testing:
+    file-missing-test-suffix:
+      ignore:
+        files:
+          - cheats/testing/with/cheat.rego
+    print-or-trace-call:
+      ignore:
+        files:
+          - cheats/debugging/print/cheat.rego
+    test-outside-test-package:
+      ignore:
+        files:
+          - cheats/testing/with/cheat.rego
