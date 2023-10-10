@@ -2,7 +2,7 @@ package cheat
 
 import future.keywords
 
-vals := [5,1,4,2,3]
+vals := [5, 1, 4, 2, 3]
 
 vals_count := count(vals)
 vals_max := max(vals)

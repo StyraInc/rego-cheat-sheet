@@ -43,3 +43,8 @@ cheats
         ├── cheat.rego
         └── cheat.yaml
 ```
+
+## Development
+
+To render the PDF after having made changes to the cheats, run `make build`.
+This requires `tectonic` to be installed (`brew install tectonic`).
