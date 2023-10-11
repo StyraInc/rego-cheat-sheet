@@ -12,6 +12,7 @@ import (
 
 type Section struct {
 	Title     string `yaml:"title"`
+	Subtitle  string `yaml:"subtitle"`
 	Rank      int    `yaml:"rank"`
 	PageBreak bool   `yaml:"page_break"`
 	Shared    string

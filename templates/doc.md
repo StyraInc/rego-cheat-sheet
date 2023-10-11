@@ -1,7 +1,7 @@
 # Rego Cheat Sheet
 
 {{ range .Sections }}
-## {{ .Title }}
+## {{ .Title }} - <sub><sup>{{ .Subtitle }}</sup></sub>
 
 {{ if ne .Shared "" }}
 _(Shared Code)_

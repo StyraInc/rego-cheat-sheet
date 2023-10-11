@@ -4,6 +4,12 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage{courier}
+\usepackage{helvet}
+
+\renewcommand{\rmdefault}{qhv}
+\renewcommand{\ttdefault}{pcr}
 
 \fancypagestyle{logo}{
     \fancyhf{}
@@ -37,19 +43,26 @@
     keywordstyle=\color{magenta},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{magenta},
     breakatwhitespace=false,
     breaklines=true,
+    frame=single,
     captionpos=b,
     keepspaces=true,
     numbers=none,
     numbersep=5pt,
     showspaces=false,
     showstringspaces=false,
+    language=Ruby,
     showtabs=false,
     tabsize=2
 }
 \lstset{style=mystyle}
+\lstset{emph={
+contains, default, startswith, endswith, replace, sprintf, regex, replace, object, get, print, as, with, match, some
+},emphstyle={\color{magenta}}
+}
 
 \begin{document}
 \pagestyle{logo}
@@ -61,10 +74,10 @@
 {{ range .Sections }}
 
 {{ if .PageBreak }}
-\pagebreak
+\newpage
 {{ end}}
 
-\section*{{ "{" }}{{ .Title }}{{ "}" }}
+\section*{{ "{" }}{{ .Title }} \raisebox{.2ex}{{ "{" }}\footnotesize{{ "{" }} \normalfont \vspace*{-10pt} {{ .Subtitle }} {{ "}" }} {{ "}" }} {{ "}" }}
 
 {{ if ne .Shared "" }}
 \textbf{\tiny{(Shared Code)}}
@@ -76,6 +89,10 @@
 {{ range .Cheats }}
 \vspace{-1em}
 \subsubsection*{{ "{" }}{{ .Title }}{{ "}" }}
+
+{{ if ne .Text "" }}
+\footnotesize{{ "{" }}{{ .Text }}{{ "}" }}
+{{ end }}
 
 \begin{lstlisting}[language=Ruby]
 {{ .BodyTex }}

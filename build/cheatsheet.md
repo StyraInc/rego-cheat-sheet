@@ -1,7 +1,7 @@
 # Rego Cheat Sheet
 
 
-## Rules
+## Rules - <sub><sup>The building blocks of Rego</sup></sub>
 
 
 
@@ -61,7 +61,7 @@ paths contains path if {
 
 
 
-## Iteration
+## Iteration - <sub><sup>Make quick work of collections</sup></sub>
 
 
 
@@ -108,9 +108,9 @@ Apply conditions to many elements.
 
 ```rego
 allow if {
-	required_prefix := sprintf("/docs/%s/", [input.userID])
+	prefix := sprintf("/docs/%s/", [input.userID])
 	every path in input.paths {
-		startswith(path, required_prefix)
+		startswith(path, prefix)
 	}
 }
 ```
@@ -119,7 +119,7 @@ allow if {
 
 
 
-## Control Flow
+## Control Flow - <sub><sup>Handle different conditions</sup></sub>
 
 
 
@@ -150,7 +150,7 @@ Express OR with multiple rules, functions or the in keyword.
 ```rego
 # using multiple rules
 valid_email if endswith(input.email, "@example.com")
-valid_email if endswith(input.email, "@test.example.com")
+valid_email if endswith(input.email, "@example.org")
 valid_email if endswith(input.email, "@example.net")
 
 # using functions
@@ -171,7 +171,7 @@ valid_request if {
 
 
 
-## Testing
+## Testing - <sub><sup>Validate your policy's behavior</sup></sub>
 
 
 
@@ -196,7 +196,7 @@ test_allow_when_admin if {
 
 
 
-## Debugging
+## Debugging - <sub><sup>Find and fix problems</sup></sub>
 
 
 
@@ -229,7 +229,7 @@ allow if {
 
 
 
-## Builtins
+## Builtins - <sub><sup>Handy functions for common tasks</sup></sub>
 
 
 
@@ -270,7 +270,12 @@ vals_sum := sum(vals)
 obj := {"userid": "18472", "roles": [{"name": "admin"}]}
 
 val := object.get(obj, ["roles", 0, "name"], "missing")
-defaulted_val := object.get(obj, ["roles", 0, "permissions"], "unknown")
+
+defaulted_val := object.get(
+	obj,
+	["roles", 0, "permissions"],
+	"unknown",
+)
 
 keys := object.keys(obj)
 ```

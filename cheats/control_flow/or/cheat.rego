@@ -4,7 +4,7 @@ import future.keywords
 
 # using multiple rules
 valid_email if endswith(input.email, "@example.com")
-valid_email if endswith(input.email, "@test.example.com")
+valid_email if endswith(input.email, "@example.org")
 valid_email if endswith(input.email, "@example.net")
 
 # using functions

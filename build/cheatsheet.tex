@@ -4,6 +4,12 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage{courier}
+\usepackage{helvet}
+
+\renewcommand{\rmdefault}{qhv}
+\renewcommand{\ttdefault}{pcr}
 
 \fancypagestyle{logo}{
     \fancyhf{}
@@ -37,19 +43,26 @@
     keywordstyle=\color{magenta},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{magenta},
     breakatwhitespace=false,
     breaklines=true,
+    frame=single,
     captionpos=b,
     keepspaces=true,
     numbers=none,
     numbersep=5pt,
     showspaces=false,
     showstringspaces=false,
+    language=Ruby,
     showtabs=false,
     tabsize=2
 }
 \lstset{style=mystyle}
+\lstset{emph={
+contains, default, startswith, endswith, replace, sprintf, regex, replace, object, get, print, as, with, match, some
+},emphstyle={\color{magenta}}
+}
 
 \begin{document}
 \pagestyle{logo}
@@ -62,13 +75,18 @@
 
 
 
-\section*{Rules}
+\section*{Rules \raisebox{.2ex}{\footnotesize{ \normalfont \vspace*{-10pt} The building blocks of Rego } } }
 
 
 
 
 \vspace{-1em}
 \subsubsection*{Complete}
+
+
+\footnotesize{Complete rules assign a single value. 
+}
+
 
 \begin{lstlisting}[language=Ruby]
 default allow := false
@@ -90,6 +108,10 @@ request_quota := 50 if input.user.plan.trial
 
 \vspace{-1em}
 \subsubsection*{Partial}
+
+
+\footnotesize{Partial rules generate and assign a set of values to a variable.}
+
 
 \begin{lstlisting}[language=Ruby]
 paths contains path if {
@@ -120,13 +142,17 @@ paths contains path if {
 
 
 
-\section*{Iteration}
+\section*{Iteration \raisebox{.2ex}{\footnotesize{ \normalfont \vspace*{-10pt} Make quick work of collections } } }
 
 
 
 
 \vspace{-1em}
 \subsubsection*{Some}
+
+
+\footnotesize{Name local query variables.}
+
 
 \begin{lstlisting}[language=Ruby]
 all_regions := {
@@ -160,11 +186,15 @@ allowed_regions contains region_id if {
 \vspace{-1em}
 \subsubsection*{Every}
 
+
+\footnotesize{Apply conditions to many elements.}
+
+
 \begin{lstlisting}[language=Ruby]
 allow if {
-	required_prefix := sprintf("/docs/%s/", [input.userID])
+	prefix := sprintf("/docs/%s/", [input.userID])
 	every path in input.paths {
-		startswith(path, required_prefix)
+		startswith(path, prefix)
 	}
 }
 \end{lstlisting}
@@ -177,13 +207,17 @@ allow if {
 
 
 
-\section*{Control Flow}
+\section*{Control Flow \raisebox{.2ex}{\footnotesize{ \normalfont \vspace*{-10pt} Handle different conditions } } }
 
 
 
 
 \vspace{-1em}
 \subsubsection*{Logical And}
+
+
+\footnotesize{Statements in rules are 'anded' together.}
+
 
 \begin{lstlisting}[language=Ruby]
 valid_staff_email if {
@@ -200,10 +234,14 @@ valid_staff_email if {
 \vspace{-1em}
 \subsubsection*{Logical Or}
 
+
+\footnotesize{Express OR with multiple rules, functions or the in keyword.}
+
+
 \begin{lstlisting}[language=Ruby]
 # using multiple rules
 valid_email if endswith(input.email, "@example.com")
-valid_email if endswith(input.email, "@test.example.com")
+valid_email if endswith(input.email, "@example.org")
 valid_email if endswith(input.email, "@example.net")
 
 # using functions
@@ -228,13 +266,17 @@ valid_request if {
 
 
 
-\section*{Testing}
+\section*{Testing \raisebox{.2ex}{\footnotesize{ \normalfont \vspace*{-10pt} Validate your policy's behavior } } }
 
 
 
 
 \vspace{-1em}
 \subsubsection*{With}
+
+
+\footnotesize{Override input and data using the with keyword.}
+
 
 \begin{lstlisting}[language=Ruby]
 allow if {
@@ -254,13 +296,17 @@ test_allow_when_admin if {
 
 
 
-\section*{Debugging}
+\section*{Debugging \raisebox{.2ex}{\footnotesize{ \normalfont \vspace*{-10pt} Find and fix problems } } }
 
 
 
 
 \vspace{-1em}
 \subsubsection*{Print}
+
+
+\footnotesize{Use print in rules to inspect values at runtime.}
+
 
 \begin{lstlisting}[language=Ruby]
 allowed_users := {"alice", "bob", "charlie"}
@@ -287,16 +333,18 @@ allow if {
 
 
 
-\pagebreak
+\newpage
 
 
-\section*{Builtins}
+\section*{Builtins \raisebox{.2ex}{\footnotesize{ \normalfont \vspace*{-10pt} Handy functions for common tasks } } }
 
 
 
 
 \vspace{-1em}
 \subsubsection*{Aggregates}
+
+
 
 \begin{lstlisting}[language=Ruby]
 vals := [5, 1, 4, 2, 3]
@@ -326,11 +374,18 @@ vals_sum := sum(vals)
 \vspace{-1em}
 \subsubsection*{Objects}
 
+
+
 \begin{lstlisting}[language=Ruby]
 obj := {"userid": "18472", "roles": [{"name": "admin"}]}
 
 val := object.get(obj, ["roles", 0, "name"], "missing")
-defaulted_val := object.get(obj, ["roles", 0, "permissions"], "unknown")
+
+defaulted_val := object.get(
+	obj,
+	["roles", 0, "permissions"],
+	"unknown",
+)
 
 keys := object.keys(obj)
 \end{lstlisting}
@@ -354,6 +409,8 @@ keys := object.keys(obj)
 
 \vspace{-1em}
 \subsubsection*{Strings}
+
+
 
 \begin{lstlisting}[language=Ruby]
 example_string := "Build Policy as Code with OPA!"
@@ -383,6 +440,8 @@ check_sprintf := sprintf("OPA is %s!", ["awesome"])
 \vspace{-1em}
 \subsubsection*{Regex}
 
+
+
 \begin{lstlisting}[language=Ruby]
 example_string := "Build Policy as Code with OPA!"
 
@@ -406,115 +465,21 @@ check_replace := regex.replace(example_string, `\s+`, "_")
 
 
 \end{document}
+<<<<<<< Updated upstream
 t}
 ting}
+=======
+k_replace": "Build_Policy_as_Code_with_OPA!"
+}
+\end{lstlisting}
+>>>>>>> Stashed changes
 
 
 
 
 
 \end{document}
-ehensions}
-
-
-\textbf{\tiny{(Shared Code)}}
-\begin{lstlisting}[language=Ruby]
-letters := ["q", "w", "i", "e", "r", "t", "y", "u", "i", " e", "y"]
-vowels := ["a", "e", "i", "o", "u", "y"]
-\end{lstlisting}
-
-
-
-\vspace{-1em}
-\subsubsection*{Arrays}
-
-\begin{lstlisting}[language=Ruby]
-array_match_vowels := [match |
-  some letter in letters
-  some vowel in vowels
-  letter == vowel
-  match := letter
-]
-\end{lstlisting}
-
-
-
-\textbf{\tiny{(Output)}}
-\begin{lstlisting}[language=Ruby]
-{
-  "array_match_vowels": [
-    "i", "e", "y", "u", "i", "e", "y"
-  ]
-}
-
-\end{lstlisting}
-
-
-
-\vspace{-1em}
-\subsubsection*{Sets}
-
-\begin{lstlisting}[language=Ruby]
-set_match_vowels := {match |
-  some letter in letters
-  some vowel in vowels
-  letter == vowel
-  match := letter
-}
-\end{lstlisting}
-
-
-
-\textbf{\tiny{(Output)}}
-\begin{lstlisting}[language=Ruby]
-{
-  "set_match_vowels": [
-    "e", "i", "u", "y"
-  ]
-}
-
-\end{lstlisting}
-
-
-
-\vspace{-1em}
-\subsubsection*{Objects}
-
-\begin{lstlisting}[language=Ruby]
-object_check_vowels := {letter: is_vowel |
-  some letter in letters
-  is_vowel := letter in vowels
-}
-\end{lstlisting}
-
-
-
-\textbf{\tiny{(Output)}}
-\begin{lstlisting}[language=Ruby]
-{
-  "object_check_vowels": {
-    "e": true, "i": true, "q": false, "r": false, "t": false, "u": true, "w": false, "y": true
-  }
-}
-
-\end{lstlisting}
-
-
-
-
-
-\end{document}
-
-}
-\end{lstlisting}
-
-
-
-\textbf{\tiny{(Output)}}
-\begin{lstlisting}[language=Ruby]
-{
-  "object_check_vowels": {
-    "e": true, "i": true, "q": false, "r": false, "t": false, "u": true, "w": false, "y": true
+: true, "i": true, "q": false, "r": false, "t": false, "u": true, "w": false, "y": true
   }
 }
 
