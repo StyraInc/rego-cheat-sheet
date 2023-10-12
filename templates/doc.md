@@ -11,14 +11,16 @@ _(Shared Code)_
 {{ end }}
 
 {{ range .Cheats }}
-### {{ .Title }}
+### {{ .Title }} 
 
 {{ if ne .Text "" }}
-{{ .Text }}
+{{ .Text }} ([Playground]({{ .PlaygroundLink }}))
+{{ else }}
+[Playground]({{ .PlaygroundLink }})
 {{ end }}
 
 ```rego
-{{ .BodyTex }}
+{{ .CodeDisplay }}
 ```
 
 {{ if ne .Output "" }}
@@ -27,6 +29,8 @@ _(Shared Code)_
 {{ .Output }}
 ```
 {{ end }}
+
+
 
 {{ end }}
 {{ end }}

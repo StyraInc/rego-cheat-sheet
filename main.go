@@ -1,6 +1,9 @@
 package main
 
 import (
+	"encoding/base64"
+	"encoding/json"
+	"net/url"
 	"os"
 	"path/filepath"
 	"sort"
@@ -26,13 +29,47 @@ type Cheat struct {
 	Text   string
 	Output string
 	Code   string
+	Input  string
 }
 
-func (c *Cheat) BodyMD() string {
-	return c.Code
+func (c *Cheat) CodeDisplay() string {
+	code := c.Code
+	code = strings.Replace(code, "package cheat", "", 1)
+	code = strings.Replace(code, "import future.keywords", "", 1)
+	code = strings.TrimSpace(code)
+
+	return code
 }
-func (c *Cheat) BodyTex() string {
-	return c.Code
+
+func (c *Cheat) PlaygroundLink() string {
+	var u url.URL
+	u.Scheme = "http"
+	u.Host = "localhost:8181"
+	u.Path = "/"
+
+	config := map[string]interface{}{
+		"p": c.Code,
+	}
+
+	if c.Input != "" {
+		config["i"] = c.Input
+	} else {
+		config["i"] = "{}"
+	}
+
+	jsonConfig, err := json.Marshal(config)
+	if err != nil {
+		panic(err)
+	}
+
+	base64Config := base64.StdEncoding.EncodeToString(jsonConfig)
+
+	params := make(url.Values)
+	params.Add("config", base64Config)
+
+	u.RawQuery = params.Encode()
+
+	return u.String()
 }
 
 func main() {
@@ -78,11 +115,17 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-
 			cheat.Code = string(cheatCodeBs)
-			cheat.Code = strings.Replace(cheat.Code, "package cheat", "", 1)
-			cheat.Code = strings.Replace(cheat.Code, "import future.keywords", "", 1)
-			cheat.Code = strings.TrimSpace(cheat.Code)
+
+			inputPath := filepath.Join("cheats", sectionDir.Name(), cheatDir.Name(), "input.json")
+			if _, err = os.Stat(inputPath); !os.IsNotExist(err) {
+				var cheatInputBs []byte
+				cheatInputBs, err = os.ReadFile(inputPath)
+				if err != nil {
+					panic(err)
+				}
+				cheat.Input = string(cheatInputBs)
+			}
 
 			cheatOutputPath := filepath.Join("cheats", sectionDir.Name(), cheatDir.Name(), "output.json")
 			if _, err = os.Stat(cheatOutputPath); !os.IsNotExist(err) {

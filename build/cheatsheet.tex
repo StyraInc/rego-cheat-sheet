@@ -7,6 +7,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{courier}
 \usepackage{helvet}
+\usepackage[colorlinks = true, urlcolor = blue]{hyperref}
 
 \renewcommand{\rmdefault}{qhv}
 \renewcommand{\ttdefault}{pcr}
@@ -80,12 +81,12 @@ contains, default, startswith, endswith, replace, sprintf, regex, replace, objec
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Complete}
 
 
 \footnotesize{Complete rules assign a single value. 
-}
+ (\href{http://localhost:8181/?config=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwicm9sZVwiOiBcImFkbWluXCIsXG4gICAgXCJpbnRlcm5hbFwiOiB0cnVlXG4gIH1cbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmRlZmF1bHQgYWxsb3cgOj0gZmFsc2VcblxuYWxsb3cgaWYge1xuXHRpbnB1dC51c2VyLnJvbGUgPT0gXCJhZG1pblwiXG5cdGlucHV0LnVzZXIuaW50ZXJuYWxcbn1cblxuZGVmYXVsdCByZXF1ZXN0X3F1b3RhIDo9IDEwMFxuXG5yZXF1ZXN0X3F1b3RhIDo9IDEwMDAgaWYgaW5wdXQudXNlci5pbnRlcm5hbFxucmVxdWVzdF9xdW90YSA6PSA1MCBpZiBpbnB1dC51c2VyLnBsYW4udHJpYWxcbiJ9}{Playground})}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -106,11 +107,11 @@ request_quota := 50 if input.user.plan.trial
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Partial}
 
 
-\footnotesize{Partial rules generate and assign a set of values to a variable.}
+\footnotesize{Partial rules generate and assign a set of values to a variable. (\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnBhdGhzIGNvbnRhaW5zIHBhdGggaWYge1xuXHRwYXRoIDo9IFwiL2hhbmRib29rLypcIlxufVxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D}{Playground})}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -147,11 +148,11 @@ paths contains path if {
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Some}
 
 
-\footnotesize{Name local query variables.}
+\footnotesize{Name local query variables. (\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmFsbF9yZWdpb25zIDo9IHtcblx0XCJlbWVhXCI6IHtcIndlc3RcIiwgXCJlYXN0XCJ9LFxuXHRcIm5hXCI6IHtcIndlc3RcIiwgXCJlYXN0XCIsIFwiY2VudHJhbFwifSxcblx0XCJsYXRhbVwiOiB7XCJ3ZXN0XCIsIFwiZWFzdFwifSxcblx0XCJhcGFjXCI6IHtcIm5vcnRoXCIsIFwic291dGhcIn0sXG59XG5cbmFsbG93ZWRfcmVnaW9ucyBjb250YWlucyByZWdpb25faWQgaWYge1xuXHRzb21lIGFyZWEsIHJlZ2lvbnMgaW4gYWxsX3JlZ2lvbnNcblxuXHRzb21lIHJlZ2lvbiBpbiByZWdpb25zXG5cdHJlZ2lvbl9pZCA6PSBzcHJpbnRmKFwiJXNfJXNcIiwgW2FyZWEsIHJlZ2lvbl0pXG59XG4ifQ%3D%3D}{Playground})}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -183,11 +184,11 @@ allowed_regions contains region_id if {
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Every}
 
 
-\footnotesize{Apply conditions to many elements.}
+\footnotesize{Apply conditions to many elements. (\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmFsbG93IGlmIHtcblx0cHJlZml4IDo9IHNwcmludGYoXCIvZG9jcy8lcy9cIiwgW2lucHV0LnVzZXJJRF0pXG5cdGV2ZXJ5IHBhdGggaW4gaW5wdXQucGF0aHMge1xuXHRcdHN0YXJ0c3dpdGgocGF0aCwgcHJlZml4KVxuXHR9XG59XG4ifQ%3D%3D}{Playground})}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -212,11 +213,11 @@ allow if {
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Logical And}
 
 
-\footnotesize{Statements in rules are 'anded' together.}
+\footnotesize{Statements in rules are 'anded' together. (\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnZhbGlkX3N0YWZmX2VtYWlsIGlmIHtcblx0cmVnZXgubWF0Y2goYF5cXFMrQFxcUytcXC5cXFMrJGAsIGlucHV0LmVtYWlsKVxuXG5cdGVuZHN3aXRoKGlucHV0LmVtYWlsLCBcImV4YW1wbGUuY29tXCIpXG59XG4ifQ%3D%3D}{Playground})}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -231,11 +232,11 @@ valid_staff_email if {
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Logical Or}
 
 
-\footnotesize{Express OR with multiple rules, functions or the in keyword.}
+\footnotesize{Express OR with multiple rules, functions or the in keyword. (\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbiMgdXNpbmcgbXVsdGlwbGUgcnVsZXNcbnZhbGlkX2VtYWlsIGlmIGVuZHN3aXRoKGlucHV0LmVtYWlsLCBcIkBleGFtcGxlLmNvbVwiKVxudmFsaWRfZW1haWwgaWYgZW5kc3dpdGgoaW5wdXQuZW1haWwsIFwiQGV4YW1wbGUub3JnXCIpXG52YWxpZF9lbWFpbCBpZiBlbmRzd2l0aChpbnB1dC5lbWFpbCwgXCJAZXhhbXBsZS5uZXRcIilcblxuIyB1c2luZyBmdW5jdGlvbnNcbmFsbG93ZWRfZmlyc3RuYW1lKG5hbWUpIGlmIG5hbWUgPT0gXCJqb2VcIlxuYWxsb3dlZF9maXJzdG5hbWUobmFtZSkgaWYgbmFtZSA9PSBcImphbmVcIlxuXG52YWxpZF9uYW1lIGlmIHtcblx0YWxsb3dlZF9maXJzdG5hbWUoaW5wdXQubmFtZSlcbn1cblxuIyB1c2luZyBgaW5gXG52YWxpZF9yZXF1ZXN0IGlmIHtcblx0aW5wdXQubWV0aG9kIGluIHtcIkdFVFwiLCBcIlBPU1RcIn1cbn1cbiJ9}{Playground})}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -271,11 +272,11 @@ valid_request if {
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{With}
 
 
-\footnotesize{Override input and data using the with keyword.}
+\footnotesize{Override input and data using the with keyword. (\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmFsbG93IGlmIHtcblx0aW5wdXQuYWRtaW4gPT0gdHJ1ZVxufVxuXG50ZXN0X2FsbG93X3doZW5fYWRtaW4gaWYge1xuXHRhbGxvdyB3aXRoIGlucHV0IGFzIHtcImFkbWluXCI6IHRydWV9XG59XG4ifQ%3D%3D}{Playground})}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -301,11 +302,11 @@ test_allow_when_admin if {
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Print}
 
 
-\footnotesize{Use print in rules to inspect values at runtime.}
+\footnotesize{Use print in rules to inspect values at runtime. (\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmFsbG93ZWRfdXNlcnMgOj0ge1wiYWxpY2VcIiwgXCJib2JcIiwgXCJjaGFybGllXCJ9XG5cbmFsbG93IGlmIHtcblx0c29tZSB1c2VyIGluIGFsbG93ZWRfdXNlcnNcblx0cHJpbnQodXNlcilcblx0aW5wdXQudXNlciA9PSB1c2VyXG59XG4ifQ%3D%3D}{Playground})}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -341,9 +342,11 @@ allow if {
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Aggregates}
 
+
+\footnotesize{\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnZhbHMgOj0gWzUsIDEsIDQsIDIsIDNdXG5cbnZhbHNfY291bnQgOj0gY291bnQodmFscylcbnZhbHNfbWF4IDo9IG1heCh2YWxzKVxudmFsc19taW4gOj0gbWluKHZhbHMpXG52YWxzX3NvcnRlZCA6PSBzb3J0KHZhbHMpXG52YWxzX3N1bSA6PSBzdW0odmFscylcbiJ9}{Playground}}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -371,9 +374,11 @@ vals_sum := sum(vals)
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Objects}
 
+
+\footnotesize{\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbm9iaiA6PSB7XCJ1c2VyaWRcIjogXCIxODQ3MlwiLCBcInJvbGVzXCI6IFt7XCJuYW1lXCI6IFwiYWRtaW5cIn1dfVxuXG52YWwgOj0gb2JqZWN0LmdldChvYmosIFtcInJvbGVzXCIsIDAsIFwibmFtZVwiXSwgXCJtaXNzaW5nXCIpXG5cbmRlZmF1bHRlZF92YWwgOj0gb2JqZWN0LmdldChcblx0b2JqLFxuXHRbXCJyb2xlc1wiLCAwLCBcInBlcm1pc3Npb25zXCJdLFxuXHRcInVua25vd25cIixcbilcblxua2V5cyA6PSBvYmplY3Qua2V5cyhvYmopXG4ifQ%3D%3D}{Playground}}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -407,9 +412,11 @@ keys := object.keys(obj)
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Strings}
 
+
+\footnotesize{\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmV4YW1wbGVfc3RyaW5nIDo9IFwiQnVpbGQgUG9saWN5IGFzIENvZGUgd2l0aCBPUEEhXCJcblxuY2hlY2tfY29udGFpbnMgaWYgY29udGFpbnMoZXhhbXBsZV9zdHJpbmcsIFwiT1BBXCIpXG5jaGVja19zdGFydHN3aXRoIGlmIHN0YXJ0c3dpdGgoZXhhbXBsZV9zdHJpbmcsIFwiQnVpbGRcIilcbmNoZWNrX2VuZHN3aXRoIGlmIGVuZHN3aXRoKGV4YW1wbGVfc3RyaW5nLCBcIiFcIilcbmNoZWNrX3JlcGxhY2UgOj0gcmVwbGFjZShleGFtcGxlX3N0cmluZywgXCJPUEFcIiwgXCJTdHlyYVwiKVxuY2hlY2tfc3ByaW50ZiA6PSBzcHJpbnRmKFwiT1BBIGlzICVzIVwiLCBbXCJhd2Vzb21lXCJdKVxuIn0%3D}{Playground}}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -437,9 +444,11 @@ check_sprintf := sprintf("OPA is %s!", ["awesome"])
 
 
 
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{Regex}
 
+
+\footnotesize{\href{http://localhost:8181/?config=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmV4YW1wbGVfc3RyaW5nIDo9IFwiQnVpbGQgUG9saWN5IGFzIENvZGUgd2l0aCBPUEEhXCJcblxuY2hlY2tfbWF0Y2ggaWYgcmVnZXgubWF0Y2goYFxcdytgLCBleGFtcGxlX3N0cmluZylcblxuY2hlY2tfcmVwbGFjZSA6PSByZWdleC5yZXBsYWNlKGV4YW1wbGVfc3RyaW5nLCBgXFxzK2AsIFwiX1wiKVxuIn0%3D}{Playground}}
 
 
 \begin{lstlisting}[language=Ruby]
@@ -465,28 +474,4 @@ check_replace := regex.replace(example_string, `\s+`, "_")
 
 
 \end{document}
-<<<<<<< Updated upstream
-t}
-ting}
-=======
-k_replace": "Build_Policy_as_Code_with_OPA!"
-}
-\end{lstlisting}
->>>>>>> Stashed changes
 
-
-
-
-
-\end{document}
-: true, "i": true, "q": false, "r": false, "t": false, "u": true, "w": false, "y": true
-  }
-}
-
-\end{lstlisting}
-
-
-
-
-
-\end{document}

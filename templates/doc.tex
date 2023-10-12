@@ -7,6 +7,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{courier}
 \usepackage{helvet}
+\usepackage[colorlinks = true, urlcolor = blue]{hyperref}
 
 \renewcommand{\rmdefault}{qhv}
 \renewcommand{\ttdefault}{pcr}
@@ -87,15 +88,17 @@ contains, default, startswith, endswith, replace, sprintf, regex, replace, objec
 {{ end }}
 
 {{ range .Cheats }}
-\vspace{-1em}
+\vspace{-0.5em}
 \subsubsection*{{ "{" }}{{ .Title }}{{ "}" }}
 
 {{ if ne .Text "" }}
-\footnotesize{{ "{" }}{{ .Text }}{{ "}" }}
+\footnotesize{{ "{" }}{{ .Text }} (\href{{ "{" }}{{ .PlaygroundLink }}{{ "}{" }}Playground{{ "}" }}){{ "}" }}
+{{ else }}
+\footnotesize{{ "{" }}\href{{ "{" }}{{ .PlaygroundLink }}{{ "}{" }}Playground{{ "}" }}{{ "}" }}
 {{ end }}
 
 \begin{lstlisting}[language=Ruby]
-{{ .BodyTex }}
+{{ .CodeDisplay }}
 \end{lstlisting}
 
 
