@@ -1,0 +1,5 @@
+{
+  "removed": { "foo": true },
+  "subset": true,
+  "unioned": { "bar": false, "foo": true }
+}

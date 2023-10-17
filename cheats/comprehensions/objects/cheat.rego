@@ -1,6 +1,8 @@
 package cheat
 
-object_check_vowels := {letter: is_vowel |
-  some letter in letters
-  is_vowel := letter in vowels
+import future.keywords
+
+is_even := {number: is_even |
+	some number in [1, 2, 3, 4]
+	is_even := (number % 2) == 0
 }

@@ -18,18 +18,18 @@ type Section struct {
 	Subtitle  string `yaml:"subtitle"`
 	Rank      int    `yaml:"rank"`
 	PageBreak bool   `yaml:"page_break"`
-	Shared    string
 	Cheats    []Cheat
 }
 
 type Cheat struct {
-	Title  string `yaml:"title"`
-	Link   string `yaml:"link"`
-	Rank   int    `yaml:"rank"`
-	Text   string
-	Output string
-	Code   string
-	Input  string
+	Title         string `yaml:"title"`
+	Link          string `yaml:"link"`
+	Rank          int    `yaml:"rank"`
+	Text          string
+	Output        string
+	TexHideOutput bool `yaml:"tex_hide_output"`
+	Code          string
+	Input         string
 }
 
 func (c *Cheat) CodeDisplay() string {
@@ -167,19 +167,6 @@ func main() {
 		}
 		section.Cheats = cheats
 
-		sharedCodePath := filepath.Join("cheats", sectionDir.Name(), "section.rego")
-
-		if _, err = os.Stat(sharedCodePath); !os.IsNotExist(err) {
-			sharedCodeBs, err := os.ReadFile(sharedCodePath)
-			if err != nil {
-				panic(err)
-			}
-
-			section.Shared = strings.TrimSpace(strings.Replace(
-				string(sharedCodeBs), "package cheat", "", 1,
-			))
-		}
-
 		sections = append(sections, section)
 	}
 
@@ -234,11 +221,15 @@ func main() {
 	}
 
 	texOutputPath := "build/cheatsheet.tex"
-	if _, err = os.Stat(texOutputPath); os.IsNotExist(err) {
-		_, err = os.Create(texOutputPath)
+	if _, err = os.Stat(texOutputPath); err == nil {
+		err = os.Remove(texOutputPath)
 		if err != nil {
 			panic(err)
 		}
+	}
+	_, err = os.Create(texOutputPath)
+	if err != nil {
+		panic(err)
 	}
 
 	texOutputFile, err := os.OpenFile(texOutputPath, os.O_RDWR, 0644)
@@ -276,5 +267,4 @@ func main() {
 			panic(err)
 		}
 	}
-
 }

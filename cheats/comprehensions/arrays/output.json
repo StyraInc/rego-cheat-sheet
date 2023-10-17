@@ -1,5 +1,3 @@
 {
-  "array_match_vowels": [
-    "i", "e", "y", "u", "i", "e", "y"
-  ]
+  "doubled": [2, 4, 6]
 }

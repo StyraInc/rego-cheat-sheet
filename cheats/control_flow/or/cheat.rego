@@ -8,8 +8,11 @@ valid_email if endswith(input.email, "@example.org")
 valid_email if endswith(input.email, "@example.net")
 
 # using functions
-allowed_firstname(name) if name == "joe"
-allowed_firstname(name) if name == "jane"
+allowed_firstname(name) if {
+    startswith(name, "a")
+    count(name) > 2
+}
+allowed_firstname("joe") # if name == 'joe'
 
 valid_name if {
 	allowed_firstname(input.name)

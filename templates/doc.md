@@ -3,20 +3,13 @@
 {{ range .Sections }}
 ## {{ .Title }} - <sub><sup>{{ .Subtitle }}</sup></sub>
 
-{{ if ne .Shared "" }}
-_(Shared Code)_
-```rego
-{{ .Shared }}
-```
-{{ end }}
-
 {{ range .Cheats }}
 ### {{ .Title }} 
 
 {{ if ne .Text "" }}
-{{ .Text }} ([Playground]({{ .PlaygroundLink }}))
+{{ .Text }} ([Try It]({{ .PlaygroundLink }}))
 {{ else }}
-[Playground]({{ .PlaygroundLink }})
+[Try It]({{ .PlaygroundLink }})
 {{ end }}
 
 ```rego

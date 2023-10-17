@@ -1,8 +1,8 @@
 package cheat
 
-set_match_vowels := {match |
-  some letter in letters
-  some vowel in vowels
-  letter == vowel
-  match := letter
+import future.keywords
+
+unique_doubled := {m |
+	some n in [10, 20, 30, 20, 10]
+	m := n * 2
 }

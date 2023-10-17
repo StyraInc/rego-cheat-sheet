@@ -1,1 +1,1 @@
-Apply conditions to many elements.
+Check conditions on many elements.

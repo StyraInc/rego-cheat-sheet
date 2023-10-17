@@ -80,21 +80,16 @@ contains, default, startswith, endswith, replace, sprintf, regex, replace, objec
 
 \section*{{ "{" }}{{ .Title }} \raisebox{.2ex}{{ "{" }}\footnotesize{{ "{" }} \normalfont \vspace*{-10pt} {{ .Subtitle }} {{ "}" }} {{ "}" }} {{ "}" }}
 
-{{ if ne .Shared "" }}
-\textbf{\tiny{(Shared Code)}}
-\begin{lstlisting}[language=Ruby]
-{{ .Shared }}
-\end{lstlisting}
-{{ end }}
-
 {{ range .Cheats }}
 \vspace{-0.5em}
+\vbox{%
+
 \subsubsection*{{ "{" }}{{ .Title }}{{ "}" }}
 
 {{ if ne .Text "" }}
-\footnotesize{{ "{" }}{{ .Text }} (\href{{ "{" }}{{ .PlaygroundLink }}{{ "}{" }}Playground{{ "}" }}){{ "}" }}
+\footnotesize{{ "{" }}{{ .Text }} (\href{{ "{" }}{{ .PlaygroundLink }}{{ "}{" }}Try It{{ "}" }}){{ "}" }}
 {{ else }}
-\footnotesize{{ "{" }}\href{{ "{" }}{{ .PlaygroundLink }}{{ "}{" }}Playground{{ "}" }}{{ "}" }}
+\footnotesize{{ "{" }}\href{{ "{" }}{{ .PlaygroundLink }}{{ "}{" }}Try It{{ "}" }}{{ "}" }}
 {{ end }}
 
 \begin{lstlisting}[language=Ruby]
@@ -102,13 +97,14 @@ contains, default, startswith, endswith, replace, sprintf, regex, replace, objec
 \end{lstlisting}
 
 
-{{ if ne .Output "" }}
+{{ if and (ne .Output "") (not .TexHideOutput) }}
 \textbf{\tiny{(Output)}}
 \begin{lstlisting}[language=Ruby]
 {{ .Output }}
 \end{lstlisting}
 {{ end }}
 
+{{ "}" }}
 {{ end }}
 {{ end }}
 

@@ -1,1 +1,1 @@
-Statements in rules are 'anded' together.
+Statements in rules are joined with logical AND.
