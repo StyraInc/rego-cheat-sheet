@@ -43,21 +43,21 @@ func (c *Cheat) CodeDisplay() string {
 
 func (c *Cheat) PlaygroundLink() string {
 	var u url.URL
-	u.Scheme = "http"
-	u.Host = "localhost:8181"
+	u.Scheme = "https"
+	u.Host = "play.openpolicyagent.org"
 	u.Path = "/"
 
-	config := map[string]interface{}{
+	state := map[string]interface{}{
 		"p": c.Code,
 	}
 
 	if c.Input != "" {
-		config["i"] = c.Input
+		state["i"] = c.Input
 	} else {
-		config["i"] = "{}"
+		state["i"] = "{}"
 	}
 
-	jsonConfig, err := json.Marshal(config)
+	jsonConfig, err := json.Marshal(state)
 	if err != nil {
 		panic(err)
 	}
@@ -65,7 +65,7 @@ func (c *Cheat) PlaygroundLink() string {
 	base64Config := base64.StdEncoding.EncodeToString(jsonConfig)
 
 	params := make(url.Values)
-	params.Add("config", base64Config)
+	params.Add("state", base64Config)
 
 	u.RawQuery = params.Encode()
 
