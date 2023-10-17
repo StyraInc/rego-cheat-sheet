@@ -202,9 +202,16 @@ func main() {
 		panic(err)
 	}
 
+	var footerBs []byte
+	footerBs, err = os.ReadFile("assets/footer.md")
+	if err != nil {
+		panic(err)
+	}
+
 	err = mdTemplate.Execute(mdOutputFile, struct {
 		Sections []Section
-	}{Sections: sections})
+		Footer   string
+	}{Sections: sections, Footer: string(footerBs)})
 	if err != nil {
 		panic(err)
 	}
@@ -237,9 +244,15 @@ func main() {
 		panic(err)
 	}
 
+	footerBs, err = os.ReadFile("assets/footer.tex")
+	if err != nil {
+		panic(err)
+	}
+
 	err = texTemplate.Execute(texOutputFile, struct {
 		Sections []Section
-	}{Sections: sections})
+		Footer   string
+	}{Sections: sections, Footer: string(footerBs)})
 	if err != nil {
 		panic(err)
 	}
