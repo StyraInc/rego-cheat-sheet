@@ -33,13 +33,11 @@ request_quota := 50 if input.user.plan.trial
 ### Partial Rules 
 
 
-Partial rules generate and assign a set of values to a variable. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnBhdGhzIGNvbnRhaW5zIHBhdGggaWYge1xuXHRwYXRoIDo9IFwiL2hhbmRib29rLypcIlxufVxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D))
+Partial rules generate and assign a set of values to a variable. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnBhdGhzIGNvbnRhaW5zIFwiL2hhbmRib29rLypcIlxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D))
 
 
 ```rego
-paths contains path if {
-	path := "/handbook/*"
-}
+paths contains "/handbook/*"
 
 paths contains path if {
 	some team in input.user.teams
@@ -281,13 +279,18 @@ doubled := [m |
 
 
 Produce unordered collections without duplicates.
- ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnVuaXF1ZV9kb3VibGVkIDo9IHttIHxcblx0c29tZSBuIGluIFsxMCwgMjAsIDMwLCAyMCwgMTBdXG5cdG0gOj0gbiAqIDJcbn1cbiJ9))
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmRlZmF1bHQgdW5pcXVlIDo9IGZhbHNlXG5cbnVuaXF1ZSBpZiB7XG5cdG51bWJlcnMgOj0gWzEsIDIsIDMsIDMsIDQsIDVdXG5cdHVuaXF1ZV9udW1iZXJzIDo9IHtuIHxcblx0XHRzb21lIG4gaW4gbnVtYmVyc1xuXHR9XG5cdGNvdW50KHVuaXF1ZV9udW1iZXJzKSA9PSBjb3VudChudW1iZXJzKVxufVxuIn0%3D))
 
 
 ```rego
-unique_doubled := {m |
-	some n in [10, 20, 30, 20, 10]
-	m := n * 2
+default unique := false
+
+unique if {
+	numbers := [1, 2, 3, 3, 4, 5]
+	unique_numbers := {n |
+		some n in numbers
+	}
+	count(unique_numbers) == count(numbers)
 }
 ```
 
@@ -295,7 +298,7 @@ unique_doubled := {m |
 ```javascript
 // Output
 {
-  "unique_doubled": [20, 40, 60]
+  "unique": false
 }
 ```
 
@@ -307,13 +310,20 @@ unique_doubled := {m |
 
 
 Produce key:value data. Note, keys must be unique.
- ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmlzX2V2ZW4gOj0ge251bWJlcjogaXNfZXZlbiB8XG5cdHNvbWUgbnVtYmVyIGluIFsxLCAyLCAzLCA0XVxuXHRpc19ldmVuIDo9IChudW1iZXIgJSAyKSA9PSAwXG59XG4ifQ%3D%3D))
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInNoYVwiOiBcIjcwMWI3ZlwiXG59XG4iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmNvbW1pdF9saXN0IDo9IFtcblx0e1wic2hhXCI6IFwiNzAxYjdmXCIsIFwibWVzc2FnZVwiOiBcIldJUFwifSxcblx0e1wic2hhXCI6IFwiYmFkZjJiXCIsIFwibWVzc2FnZVwiOiBcIkJ1aWxkIEZlYXR1cmUgQVwifSxcbl1cblxuY29tbWl0X2ludmFsaWQgY29udGFpbnMgXCJXSVAgY29tbWl0cyBhcmUgbm90IGFsbG93ZWRcIiBpZiB7XG5cdGNvbW1pdHMgOj0ge2NvbW1pdC5zaGE6IGNvbW1pdC5tZXNzYWdlIHxcblx0XHRzb21lIGNvbW1pdCBpbiBjb21taXRfbGlzdFxuXHR9XG5cdGNvbW1pdHNbaW5wdXQuc2hhXSA9PSBcIldJUFwiXG59XG4ifQ%3D%3D))
 
 
 ```rego
-is_even := {number: is_even |
-	some number in [1, 2, 3, 4]
-	is_even := (number % 2) == 0
+commit_list := [
+	{"sha": "701b7f", "message": "WIP"},
+	{"sha": "badf2b", "message": "Build Feature A"},
+]
+
+commit_invalid contains "WIP commits are not allowed" if {
+	commits := {commit.sha: commit.message |
+		some commit in commit_list
+	}
+	commits[input.sha] == "WIP"
 }
 ```
 
@@ -321,9 +331,7 @@ is_even := {number: is_even |
 ```javascript
 // Output
 {
-  "is_even": {
-    "1": false, "2": true, "3": false, "4": true
-  }
+  "commit_invalid": ["WIP commits are not allowed"]
 }
 ```
 
