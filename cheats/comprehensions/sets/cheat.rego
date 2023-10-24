@@ -2,7 +2,12 @@ package cheat
 
 import future.keywords
 
-unique_doubled := {m |
-	some n in [10, 20, 30, 20, 10]
-	m := n * 2
+default unique := false
+
+unique if {
+	numbers := [1, 2, 3, 3, 4, 5]
+	unique_numbers := {n |
+		some n in numbers
+	}
+	count(unique_numbers) == count(numbers)
 }
