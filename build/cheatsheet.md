@@ -255,12 +255,12 @@ allow if {
 
 
 Produce ordered collections, maintaining duplicates.
- ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmRvdWJsZWQgOj0gW20gfFxuXHRzb21lIG4gaW4gWzEsIDIsIDNdXG5cdG0gOj0gbiAqIDJcbl1cbiJ9))
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmRvdWJsZWQgOj0gW20gfFxuXHRzb21lIG4gaW4gWzEsIDIsIDMsIDNdXG5cdG0gOj0gbiAqIDJcbl1cbiJ9))
 
 
 ```rego
 doubled := [m |
-	some n in [1, 2, 3]
+	some n in [1, 2, 3, 3]
 	m := n * 2
 ]
 ```
@@ -269,7 +269,7 @@ doubled := [m |
 ```javascript
 // Output
 {
-  "doubled": [2, 4, 6]
+  "doubled": [2, 4, 6, 6]
 }
 ```
 
@@ -306,7 +306,7 @@ unique_doubled := {m |
 ### Objects 
 
 
-Produce key:value data.
+Produce key:value data. Note, keys must be unique.
  ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmlzX2V2ZW4gOj0ge251bWJlcjogaXNfZXZlbiB8XG5cdHNvbWUgbnVtYmVyIGluIFsxLCAyLCAzLCA0XVxuXHRpc19ldmVuIDo9IChudW1iZXIgJSAyKSA9PSAwXG59XG4ifQ%3D%3D))
 
 

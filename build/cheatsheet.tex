@@ -372,12 +372,12 @@ allow if {
 
 
 \footnotesize{Produce ordered collections, maintaining duplicates.
- (\href{https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmRvdWJsZWQgOj0gW20gfFxuXHRzb21lIG4gaW4gWzEsIDIsIDNdXG5cdG0gOj0gbiAqIDJcbl1cbiJ9}{Try It})}
+ (\href{https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmRvdWJsZWQgOj0gW20gfFxuXHRzb21lIG4gaW4gWzEsIDIsIDMsIDNdXG5cdG0gOj0gbiAqIDJcbl1cbiJ9}{Try It})}
 
 
 \begin{lstlisting}[language=Ruby]
 doubled := [m |
-	some n in [1, 2, 3]
+	some n in [1, 2, 3, 3]
 	m := n * 2
 ]
 \end{lstlisting}
@@ -387,7 +387,7 @@ doubled := [m |
 \textbf{\tiny{(Output)}}
 \begin{lstlisting}[language=Ruby]
 {
-  "doubled": [2, 4, 6]
+  "doubled": [2, 4, 6, 6]
 }
 \end{lstlisting}
 
@@ -429,7 +429,7 @@ unique_doubled := {m |
 \subsubsection*{Objects}
 
 
-\footnotesize{Produce key:value data.
+\footnotesize{Produce key:value data. Note, keys must be unique.
  (\href{https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmlzX2V2ZW4gOj0ge251bWJlcjogaXNfZXZlbiB8XG5cdHNvbWUgbnVtYmVyIGluIFsxLCAyLCAzLCA0XVxuXHRpc19ldmVuIDo9IChudW1iZXIgJSAyKSA9PSAwXG59XG4ifQ%3D%3D}{Try It})}
 
 

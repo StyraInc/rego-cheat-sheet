@@ -1,1 +1,1 @@
-Produce key:value data.
+Produce key:value data. Note, keys must be unique.
