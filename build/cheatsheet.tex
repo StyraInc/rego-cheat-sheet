@@ -114,13 +114,11 @@ request_quota := 50 if input.user.plan.trial
 \subsubsection*{Partial Rules}
 
 
-\footnotesize{Partial rules generate and assign a set of values to a variable. (\href{https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnBhdGhzIGNvbnRhaW5zIHBhdGggaWYge1xuXHRwYXRoIDo9IFwiL2hhbmRib29rLypcIlxufVxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D}{Try It})}
+\footnotesize{Partial rules generate and assign a set of values to a variable. (\href{https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwidGVhbXNcIjogW1xuICAgICAgXCJvcHNcIixcbiAgICAgIFwiZW5nXCJcbiAgICBdXG4gIH1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCBmdXR1cmUua2V5d29yZHNcblxucGF0aHMgY29udGFpbnMgXCIvaGFuZGJvb2svKlwiXG5cbnBhdGhzIGNvbnRhaW5zIHBhdGggaWYge1xuXHRzb21lIHRlYW0gaW4gaW5wdXQudXNlci50ZWFtc1xuXHRwYXRoIDo9IHNwcmludGYoXCIvdGVhbXMvJXYvKlwiLCBbdGVhbV0pXG59XG4ifQ%3D%3D}{Try It})}
 
 
 \begin{lstlisting}[language=Ruby]
-paths contains path if {
-	path := "/handbook/*"
-}
+paths contains "/handbook/*"
 
 paths contains path if {
 	some team in input.user.teams
@@ -418,6 +416,7 @@ unique_doubled := {m |
 {
   "unique_doubled": [20, 40, 60]
 }
+
 \end{lstlisting}
 
 
@@ -449,6 +448,7 @@ is_even := {number: is_even |
     "1": false, "2": true, "3": false, "4": true
   }
 }
+
 \end{lstlisting}
 
 
