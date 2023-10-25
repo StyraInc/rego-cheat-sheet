@@ -1,3 +1,5 @@
 {
-  "commit_invalid": ["WIP commits are not allowed"]
+  "is_even": {
+    "1": false, "2": true, "3": false, "4": true
+  }
 }
