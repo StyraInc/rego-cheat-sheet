@@ -2,6 +2,11 @@ rules:
   idiomatic:
     no-defined-entrypoint:
       level: ignore
+    prefer-set-or-object-rule:
+      ignore:
+        files:
+          - cheats/comprehensions/sets/cheat.rego
+          - cheats/comprehensions/objects/cheat.rego
   imports:
     implicit-future-keywords:
       level: ignore
