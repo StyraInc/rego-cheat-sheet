@@ -238,7 +238,6 @@ allow if {
 // alice
 // bob
 // charlie
-
 ```
 
 
@@ -295,7 +294,6 @@ unique_doubled := {m |
 {
   "unique_doubled": [20, 40, 60]
 }
-
 ```
 
 
@@ -324,7 +322,6 @@ is_even := {number: is_even |
     "1": false, "2": true, "3": false, "4": true
   }
 }
-
 ```
 
 

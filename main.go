@@ -134,7 +134,7 @@ func main() {
 					panic(err)
 				}
 
-				cheat.Output = string(cheatOutputBs)
+				cheat.Output = strings.TrimSpace(string(cheatOutputBs))
 			}
 
 			cheatTextPath := filepath.Join("cheats", sectionDir.Name(), cheatDir.Name(), "cheat.txt")
