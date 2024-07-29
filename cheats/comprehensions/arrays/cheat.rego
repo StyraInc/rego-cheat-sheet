@@ -1,6 +1,6 @@
 package cheat
 
-import future.keywords
+import rego.v1
 
 doubled := [m |
 	some n in [1, 2, 3, 3]

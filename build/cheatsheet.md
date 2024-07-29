@@ -8,7 +8,7 @@
 
 
 Complete rules assign a single value. 
- ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwicm9sZVwiOiBcImFkbWluXCIsXG4gICAgXCJpbnRlcm5hbFwiOiB0cnVlXG4gIH1cbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmRlZmF1bHQgYWxsb3cgOj0gZmFsc2VcblxuYWxsb3cgaWYge1xuXHRpbnB1dC51c2VyLnJvbGUgPT0gXCJhZG1pblwiXG5cdGlucHV0LnVzZXIuaW50ZXJuYWxcbn1cblxuZGVmYXVsdCByZXF1ZXN0X3F1b3RhIDo9IDEwMFxuXG5yZXF1ZXN0X3F1b3RhIDo9IDEwMDAgaWYgaW5wdXQudXNlci5pbnRlcm5hbFxucmVxdWVzdF9xdW90YSA6PSA1MCBpZiBpbnB1dC51c2VyLnBsYW4udHJpYWxcbiJ9))
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwicm9sZVwiOiBcImFkbWluXCIsXG4gICAgXCJpbnRlcm5hbFwiOiB0cnVlXG4gIH1cbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5kZWZhdWx0IGFsbG93IDo9IGZhbHNlXG5cbmFsbG93IGlmIHtcblx0aW5wdXQudXNlci5yb2xlID09IFwiYWRtaW5cIlxuXHRpbnB1dC51c2VyLmludGVybmFsXG59XG5cbmRlZmF1bHQgcmVxdWVzdF9xdW90YSA6PSAxMDBcblxucmVxdWVzdF9xdW90YSA6PSAxMDAwIGlmIGlucHV0LnVzZXIuaW50ZXJuYWxcblxucmVxdWVzdF9xdW90YSA6PSA1MCBpZiBpbnB1dC51c2VyLnBsYW4udHJpYWxcbiJ9))
 
 
 ```rego
@@ -22,6 +22,7 @@ allow if {
 default request_quota := 100
 
 request_quota := 1000 if input.user.internal
+
 request_quota := 50 if input.user.plan.trial
 ```
 
@@ -33,7 +34,7 @@ request_quota := 50 if input.user.plan.trial
 ### Partial Rules 
 
 
-Partial rules generate and assign a set of values to a variable. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwidGVhbXNcIjogW1xuICAgICAgXCJvcHNcIixcbiAgICAgIFwiZW5nXCJcbiAgICBdXG4gIH1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCBmdXR1cmUua2V5d29yZHNcblxucGF0aHMgY29udGFpbnMgXCIvaGFuZGJvb2svKlwiXG5cbnBhdGhzIGNvbnRhaW5zIHBhdGggaWYge1xuXHRzb21lIHRlYW0gaW4gaW5wdXQudXNlci50ZWFtc1xuXHRwYXRoIDo9IHNwcmludGYoXCIvdGVhbXMvJXYvKlwiLCBbdGVhbV0pXG59XG4ifQ%3D%3D))
+Partial rules generate and assign a set of values to a variable. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwidGVhbXNcIjogW1xuICAgICAgXCJvcHNcIixcbiAgICAgIFwiZW5nXCJcbiAgICBdXG4gIH1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCByZWdvLnYxXG5cbnBhdGhzIGNvbnRhaW5zIFwiL2hhbmRib29rLypcIlxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D))
 
 
 ```rego
@@ -49,10 +50,7 @@ paths contains path if {
 ```javascript
 // Output
 {
-  "paths": [
-    "/handbook/*",
-    "/teams/owl/*", "/teams/tiger/*"
-  ]
+  "paths": ["/handbook/*", "/teams/owl/*", "/teams/tiger/*"]
 }
 ```
 
@@ -67,7 +65,7 @@ paths contains path if {
 ### Some 
 
 
-Name local query variables. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmFsbF9yZWdpb25zIDo9IHtcblx0XCJlbWVhXCI6IHtcIndlc3RcIiwgXCJlYXN0XCJ9LFxuXHRcIm5hXCI6IHtcIndlc3RcIiwgXCJlYXN0XCIsIFwiY2VudHJhbFwifSxcblx0XCJsYXRhbVwiOiB7XCJ3ZXN0XCIsIFwiZWFzdFwifSxcblx0XCJhcGFjXCI6IHtcIm5vcnRoXCIsIFwic291dGhcIn0sXG59XG5cbmFsbG93ZWRfcmVnaW9ucyBjb250YWlucyByZWdpb25faWQgaWYge1xuXHRzb21lIGFyZWEsIHJlZ2lvbnMgaW4gYWxsX3JlZ2lvbnNcblxuXHRzb21lIHJlZ2lvbiBpbiByZWdpb25zXG5cdHJlZ2lvbl9pZCA6PSBzcHJpbnRmKFwiJXNfJXNcIiwgW2FyZWEsIHJlZ2lvbl0pXG59XG4ifQ%3D%3D))
+Name local query variables. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5hbGxfcmVnaW9ucyA6PSB7XG5cdFwiZW1lYVwiOiB7XCJ3ZXN0XCIsIFwiZWFzdFwifSxcblx0XCJuYVwiOiB7XCJ3ZXN0XCIsIFwiZWFzdFwiLCBcImNlbnRyYWxcIn0sXG5cdFwibGF0YW1cIjoge1wid2VzdFwiLCBcImVhc3RcIn0sXG5cdFwiYXBhY1wiOiB7XCJub3J0aFwiLCBcInNvdXRoXCJ9LFxufVxuXG5hbGxvd2VkX3JlZ2lvbnMgY29udGFpbnMgcmVnaW9uX2lkIGlmIHtcblx0c29tZSBhcmVhLCByZWdpb25zIGluIGFsbF9yZWdpb25zXG5cblx0c29tZSByZWdpb24gaW4gcmVnaW9uc1xuXHRyZWdpb25faWQgOj0gc3ByaW50ZihcIiVzXyVzXCIsIFthcmVhLCByZWdpb25dKVxufVxuIn0%3D))
 
 
 ```rego
@@ -103,7 +101,7 @@ allowed_regions contains region_id if {
 ### Every 
 
 
-Check conditions on many elements. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJJRFwiOiBcInUxMjNcIixcbiAgXCJwYXRoc1wiOiBbXG4gICAgXCIvZG9jcy91MTIzL25vdGVzLnR4dFwiLFxuICAgIFwiL2RvY3MvdTEyMy9xNC1yZXBvcnQuZG9jeFwiXG4gIF1cbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmFsbG93IGlmIHtcblx0cHJlZml4IDo9IHNwcmludGYoXCIvZG9jcy8lcy9cIiwgW2lucHV0LnVzZXJJRF0pXG5cdGV2ZXJ5IHBhdGggaW4gaW5wdXQucGF0aHMge1xuXHRcdHN0YXJ0c3dpdGgocGF0aCwgcHJlZml4KVxuXHR9XG59XG4ifQ%3D%3D))
+Check conditions on many elements. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJJRFwiOiBcInUxMjNcIixcbiAgXCJwYXRoc1wiOiBbXG4gICAgXCIvZG9jcy91MTIzL25vdGVzLnR4dFwiLFxuICAgIFwiL2RvY3MvdTEyMy9xNC1yZXBvcnQuZG9jeFwiXG4gIF1cbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5hbGxvdyBpZiB7XG5cdHByZWZpeCA6PSBzcHJpbnRmKFwiL2RvY3MvJXMvXCIsIFtpbnB1dC51c2VySURdKVxuXHRldmVyeSBwYXRoIGluIGlucHV0LnBhdGhzIHtcblx0XHRzdGFydHN3aXRoKHBhdGgsIHByZWZpeClcblx0fVxufVxuIn0%3D))
 
 
 ```rego
@@ -127,7 +125,7 @@ allow if {
 ### Logical AND 
 
 
-Statements in rules are joined with logical AND. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcImVtYWlsXCI6IFwiam9lQGV4YW1wbGUuY29tXCJcbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnZhbGlkX3N0YWZmX2VtYWlsIGlmIHtcblx0cmVnZXgubWF0Y2goYF5cXFMrQFxcUytcXC5cXFMrJGAsIGlucHV0LmVtYWlsKVxuXG5cdCMgYW5kXG5cdGVuZHN3aXRoKGlucHV0LmVtYWlsLCBcImV4YW1wbGUuY29tXCIpXG59XG4ifQ%3D%3D))
+Statements in rules are joined with logical AND. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcImVtYWlsXCI6IFwiam9lQGV4YW1wbGUuY29tXCJcbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG52YWxpZF9zdGFmZl9lbWFpbCBpZiB7XG5cdHJlZ2V4Lm1hdGNoKGBeXFxTK0BcXFMrXFwuXFxTKyRgLCBpbnB1dC5lbWFpbClcblxuXHQjIGFuZFxuXHRlbmRzd2l0aChpbnB1dC5lbWFpbCwgXCJleGFtcGxlLmNvbVwiKVxufVxuIn0%3D))
 
 
 ```rego
@@ -147,20 +145,23 @@ valid_staff_email if {
 ### Logical OR 
 
 
-Express OR with multiple rules, functions or the in keyword. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcImVtYWlsXCI6IFwib3BhQGV4YW1wbGUuY29tXCIsXG4gIFwibmFtZVwiOiBcImFubmFcIixcbiAgXCJtZXRob2RcIjogXCJHRVRcIlxufSIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCBmdXR1cmUua2V5d29yZHNcblxuIyB1c2luZyBtdWx0aXBsZSBydWxlc1xudmFsaWRfZW1haWwgaWYgZW5kc3dpdGgoaW5wdXQuZW1haWwsIFwiQGV4YW1wbGUuY29tXCIpXG52YWxpZF9lbWFpbCBpZiBlbmRzd2l0aChpbnB1dC5lbWFpbCwgXCJAZXhhbXBsZS5vcmdcIilcbnZhbGlkX2VtYWlsIGlmIGVuZHN3aXRoKGlucHV0LmVtYWlsLCBcIkBleGFtcGxlLm5ldFwiKVxuXG4jIHVzaW5nIGZ1bmN0aW9uc1xuYWxsb3dlZF9maXJzdG5hbWUobmFtZSkgaWYge1xuICAgIHN0YXJ0c3dpdGgobmFtZSwgXCJhXCIpXG4gICAgY291bnQobmFtZSkgXHUwMDNlIDJcbn1cbmFsbG93ZWRfZmlyc3RuYW1lKFwiam9lXCIpICMgaWYgbmFtZSA9PSAnam9lJ1xuXG52YWxpZF9uYW1lIGlmIHtcblx0YWxsb3dlZF9maXJzdG5hbWUoaW5wdXQubmFtZSlcbn1cblxuIyB1c2luZyBgaW5gXG52YWxpZF9yZXF1ZXN0IGlmIHtcblx0aW5wdXQubWV0aG9kIGluIHtcIkdFVFwiLCBcIlBPU1RcIn1cbn1cbiJ9))
+Express OR with multiple rules, functions or the in keyword. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcImVtYWlsXCI6IFwib3BhQGV4YW1wbGUuY29tXCIsXG4gIFwibmFtZVwiOiBcImFubmFcIixcbiAgXCJtZXRob2RcIjogXCJHRVRcIlxufSIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCByZWdvLnYxXG5cbiMgdXNpbmcgbXVsdGlwbGUgcnVsZXNcbnZhbGlkX2VtYWlsIGlmIGVuZHN3aXRoKGlucHV0LmVtYWlsLCBcIkBleGFtcGxlLmNvbVwiKVxuXG52YWxpZF9lbWFpbCBpZiBlbmRzd2l0aChpbnB1dC5lbWFpbCwgXCJAZXhhbXBsZS5vcmdcIilcblxudmFsaWRfZW1haWwgaWYgZW5kc3dpdGgoaW5wdXQuZW1haWwsIFwiQGV4YW1wbGUubmV0XCIpXG5cbiMgdXNpbmcgZnVuY3Rpb25zXG5hbGxvd2VkX2ZpcnN0bmFtZShuYW1lKSBpZiB7XG5cdHN0YXJ0c3dpdGgobmFtZSwgXCJhXCIpXG5cdGNvdW50KG5hbWUpIFx1MDAzZSAyXG59XG5cbmFsbG93ZWRfZmlyc3RuYW1lKFwiam9lXCIpICMgaWYgbmFtZSA9PSAnam9lJ1xuXG52YWxpZF9uYW1lIGlmIHtcblx0YWxsb3dlZF9maXJzdG5hbWUoaW5wdXQubmFtZSlcbn1cblxuIyB1c2luZyBgaW5gXG52YWxpZF9yZXF1ZXN0IGlmIHtcblx0aW5wdXQubWV0aG9kIGluIHtcIkdFVFwiLCBcIlBPU1RcIn1cbn1cbiJ9))
 
 
 ```rego
 # using multiple rules
 valid_email if endswith(input.email, "@example.com")
+
 valid_email if endswith(input.email, "@example.org")
+
 valid_email if endswith(input.email, "@example.net")
 
 # using functions
 allowed_firstname(name) if {
-    startswith(name, "a")
-    count(name) > 2
+	startswith(name, "a")
+	count(name) > 2
 }
+
 allowed_firstname("joe") # if name == 'joe'
 
 valid_name if {
@@ -177,9 +178,7 @@ valid_request if {
 ```javascript
 // Output
 {
-  "email": "opa@example.com",
-  "name": "anna",
-  "method": "GET"
+  "email": "opa@example.com", "name": "anna", "method": "GET"
 }
 ```
 
@@ -194,13 +193,11 @@ valid_request if {
 ### With 
 
 
-Override input and data using the with keyword. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmFsbG93IGlmIHtcblx0aW5wdXQuYWRtaW4gPT0gdHJ1ZVxufVxuXG50ZXN0X2FsbG93X3doZW5fYWRtaW4gaWYge1xuXHRhbGxvdyB3aXRoIGlucHV0IGFzIHtcImFkbWluXCI6IHRydWV9XG59XG4ifQ%3D%3D))
+Override input and data using the with keyword. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5hbGxvdyBpZiBpbnB1dC5hZG1pbiA9PSB0cnVlXG5cbnRlc3RfYWxsb3dfd2hlbl9hZG1pbiBpZiB7XG5cdGFsbG93IHdpdGggaW5wdXQgYXMge1wiYWRtaW5cIjogdHJ1ZX1cbn1cbiJ9))
 
 
 ```rego
-allow if {
-	input.admin == true
-}
+allow if input.admin == true
 
 test_allow_when_admin if {
 	allow with input as {"admin": true}
@@ -219,7 +216,7 @@ test_allow_when_admin if {
 ### Print 
 
 
-Use print in rules to inspect values at runtime. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmFsbG93ZWRfdXNlcnMgOj0ge1wiYWxpY2VcIiwgXCJib2JcIiwgXCJjaGFybGllXCJ9XG5cbmFsbG93IGlmIHtcblx0c29tZSB1c2VyIGluIGFsbG93ZWRfdXNlcnNcblx0cHJpbnQodXNlcilcblx0aW5wdXQudXNlciA9PSB1c2VyXG59XG4ifQ%3D%3D))
+Use print in rules to inspect values at runtime. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5hbGxvd2VkX3VzZXJzIDo9IHtcImFsaWNlXCIsIFwiYm9iXCIsIFwiY2hhcmxpZVwifVxuXG5hbGxvdyBpZiB7XG5cdHNvbWUgdXNlciBpbiBhbGxvd2VkX3VzZXJzXG5cdHByaW50KHVzZXIpXG5cdGlucHV0LnVzZXIgPT0gdXNlclxufVxuIn0%3D))
 
 
 ```rego
@@ -252,7 +249,7 @@ allow if {
 
 
 Produce ordered collections, maintaining duplicates.
- ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmRvdWJsZWQgOj0gW20gfFxuXHRzb21lIG4gaW4gWzEsIDIsIDMsIDNdXG5cdG0gOj0gbiAqIDJcbl1cbiJ9))
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5kb3VibGVkIDo9IFttIHxcblx0c29tZSBuIGluIFsxLCAyLCAzLCAzXVxuXHRtIDo9IG4gKiAyXG5dXG4ifQ%3D%3D))
 
 
 ```rego
@@ -278,11 +275,11 @@ doubled := [m |
 
 
 Produce unordered collections without duplicates.
- ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnVuaXF1ZV9kb3VibGVkIDo9IHttIHxcblx0c29tZSBuIGluIFsxMCwgMjAsIDMwLCAyMCwgMTBdXG5cdG0gOj0gbiAqIDJcbn1cbiJ9))
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG51bmlxdWVfZG91YmxlZCBjb250YWlucyBtIGlmIHtcblx0c29tZSBuIGluIFsxMCwgMjAsIDMwLCAyMCwgMTBdXG5cdG0gOj0gbiAqIDJcbn1cbiJ9))
 
 
 ```rego
-unique_doubled := {m |
+unique_doubled contains m if {
 	some n in [10, 20, 30, 20, 10]
 	m := n * 2
 }
@@ -304,11 +301,11 @@ unique_doubled := {m |
 
 
 Produce key:value data. Note, keys must be unique.
- ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmlzX2V2ZW4gOj0ge251bWJlcjogaXNfZXZlbiB8XG5cdHNvbWUgbnVtYmVyIGluIFsxLCAyLCAzLCA0XVxuXHRpc19ldmVuIDo9IChudW1iZXIgJSAyKSA9PSAwXG59XG4ifQ%3D%3D))
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5pc19ldmVuW251bWJlcl0gOj0gaXNfZXZlbiBpZiB7XG5cdHNvbWUgbnVtYmVyIGluIFsxLCAyLCAzLCA0XVxuXHRpc19ldmVuIDo9IChudW1iZXIgJSAyKSA9PSAwXG59XG4ifQ%3D%3D))
 
 
 ```rego
-is_even := {number: is_even |
+is_even[number] := is_even if {
 	some number in [1, 2, 3, 4]
 	is_even := (number % 2) == 0
 }
@@ -335,7 +332,7 @@ is_even := {number: is_even |
 ### Regex 
 
 
-Pattern match and replace string data. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmV4YW1wbGVfc3RyaW5nIDo9IFwiQnVpbGQgUG9saWN5IGFzIENvZGUgd2l0aCBPUEEhXCJcblxuY2hlY2tfbWF0Y2ggaWYgcmVnZXgubWF0Y2goYFxcdytgLCBleGFtcGxlX3N0cmluZylcblxuY2hlY2tfcmVwbGFjZSA6PSByZWdleC5yZXBsYWNlKGV4YW1wbGVfc3RyaW5nLCBgXFxzK2AsIFwiX1wiKVxuIn0%3D))
+Pattern match and replace string data. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5leGFtcGxlX3N0cmluZyA6PSBcIkJ1aWxkIFBvbGljeSBhcyBDb2RlIHdpdGggT1BBIVwiXG5cbmNoZWNrX21hdGNoIGlmIHJlZ2V4Lm1hdGNoKGBcXHcrYCwgZXhhbXBsZV9zdHJpbmcpXG5cbmNoZWNrX3JlcGxhY2UgOj0gcmVnZXgucmVwbGFjZShleGFtcGxlX3N0cmluZywgYFxccytgLCBcIl9cIilcbiJ9))
 
 
 ```rego
@@ -362,7 +359,7 @@ check_replace := regex.replace(example_string, `\s+`, "_")
 ### Strings 
 
 
-Check and transform strings. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbmV4YW1wbGVfc3RyaW5nIDo9IFwiQnVpbGQgUG9saWN5IGFzIENvZGUgd2l0aCBPUEEhXCJcblxuY2hlY2tfY29udGFpbnMgaWYgY29udGFpbnMoZXhhbXBsZV9zdHJpbmcsIFwiT1BBXCIpXG5jaGVja19zdGFydHN3aXRoIGlmIHN0YXJ0c3dpdGgoZXhhbXBsZV9zdHJpbmcsIFwiQnVpbGRcIilcbmNoZWNrX2VuZHN3aXRoIGlmIGVuZHN3aXRoKGV4YW1wbGVfc3RyaW5nLCBcIiFcIilcbmNoZWNrX3JlcGxhY2UgOj0gcmVwbGFjZShleGFtcGxlX3N0cmluZywgXCJPUEFcIiwgXCJTdHlyYVwiKVxuY2hlY2tfc3ByaW50ZiA6PSBzcHJpbnRmKFwiT1BBIGlzICVzIVwiLCBbXCJhd2Vzb21lXCJdKVxuIn0%3D))
+Check and transform strings. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5leGFtcGxlX3N0cmluZyA6PSBcIkJ1aWxkIFBvbGljeSBhcyBDb2RlIHdpdGggT1BBIVwiXG5cbmNoZWNrX2NvbnRhaW5zIGlmIGNvbnRhaW5zKGV4YW1wbGVfc3RyaW5nLCBcIk9QQVwiKVxuY2hlY2tfc3RhcnRzd2l0aCBpZiBzdGFydHN3aXRoKGV4YW1wbGVfc3RyaW5nLCBcIkJ1aWxkXCIpXG5jaGVja19lbmRzd2l0aCBpZiBlbmRzd2l0aChleGFtcGxlX3N0cmluZywgXCIhXCIpXG5jaGVja19yZXBsYWNlIDo9IHJlcGxhY2UoZXhhbXBsZV9zdHJpbmcsIFwiT1BBXCIsIFwiU3R5cmFcIilcbmNoZWNrX3NwcmludGYgOj0gc3ByaW50ZihcIk9QQSBpcyAlcyFcIiwgW1wiYXdlc29tZVwiXSlcbiJ9))
 
 
 ```rego
@@ -394,12 +391,11 @@ check_sprintf := sprintf("OPA is %s!", ["awesome"])
 ### Aggregates 
 
 
-Summarize data. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnZhbHMgOj0gWzUsIDEsIDQsIDIsIDNdXG5cbnZhbHNfY291bnQgOj0gY291bnQodmFscylcbnZhbHNfbWF4IDo9IG1heCh2YWxzKVxudmFsc19taW4gOj0gbWluKHZhbHMpXG52YWxzX3NvcnRlZCA6PSBzb3J0KHZhbHMpXG52YWxzX3N1bSA6PSBzdW0odmFscylcbiJ9))
+Summarize data. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG52YWxzIDo9IFs1LCAxLCA0LCAyLCAzXVxudmFsc19jb3VudCA6PSBjb3VudCh2YWxzKVxudmFsc19tYXggOj0gbWF4KHZhbHMpXG52YWxzX21pbiA6PSBtaW4odmFscylcbnZhbHNfc29ydGVkIDo9IHNvcnQodmFscylcbnZhbHNfc3VtIDo9IHN1bSh2YWxzKVxuIn0%3D))
 
 
 ```rego
 vals := [5, 1, 4, 2, 3]
-
 vals_count := count(vals)
 vals_max := max(vals)
 vals_min := min(vals)
@@ -426,7 +422,7 @@ vals_sum := sum(vals)
 ### Objects: Extracting Data 
 
 
-Work with key value and nested data. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbm9iaiA6PSB7XCJ1c2VyaWRcIjogXCIxODQ3MlwiLCBcInJvbGVzXCI6IFt7XCJuYW1lXCI6IFwiYWRtaW5cIn1dfVxuXG4jIHBhdGhzIGNhbiBjb250YWluIGFycmF5IGluZGV4ZXMgdG9vXG52YWwgOj0gb2JqZWN0LmdldChvYmosIFtcInJvbGVzXCIsIDAsIFwibmFtZVwiXSwgXCJtaXNzaW5nXCIpXG5cbmRlZmF1bHRlZF92YWwgOj0gb2JqZWN0LmdldChcblx0b2JqLFxuXHRbXCJyb2xlc1wiLCAwLCBcInBlcm1pc3Npb25zXCJdLCAjIHBhdGhcblx0XCJ1bmtub3duXCIsICMgZGVmYXVsdCBpZiBwYXRoIGlzIG1pc3Npbmdcbilcblxua2V5cyA6PSBvYmplY3Qua2V5cyhvYmopXG4ifQ%3D%3D))
+Work with key value and nested data. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5vYmogOj0ge1widXNlcmlkXCI6IFwiMTg0NzJcIiwgXCJyb2xlc1wiOiBbe1wibmFtZVwiOiBcImFkbWluXCJ9XX1cblxuIyBwYXRocyBjYW4gY29udGFpbiBhcnJheSBpbmRleGVzIHRvb1xudmFsIDo9IG9iamVjdC5nZXQob2JqLCBbXCJyb2xlc1wiLCAwLCBcIm5hbWVcIl0sIFwibWlzc2luZ1wiKVxuXG5kZWZhdWx0ZWRfdmFsIDo9IG9iamVjdC5nZXQoXG5cdG9iaixcblx0W1wicm9sZXNcIiwgMCwgXCJwZXJtaXNzaW9uc1wiXSwgIyBwYXRoXG5cdFwidW5rbm93blwiLCAjIGRlZmF1bHQgaWYgcGF0aCBpcyBtaXNzaW5nXG4pXG5cbmtleXMgOj0gb2JqZWN0LmtleXMob2JqKVxuIn0%3D))
 
 
 ```rego
@@ -462,7 +458,7 @@ keys := object.keys(obj)
 ### Objects: Transforming Data 
 
 
-Manipulate and make checks on objects. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgZnV0dXJlLmtleXdvcmRzXG5cbnVuaW9uZWQgOj0gb2JqZWN0LnVuaW9uKHtcImZvb1wiOiB0cnVlfSwge1wiYmFyXCI6IGZhbHNlfSlcblxuc3Vic2V0IDo9IG9iamVjdC5zdWJzZXQoXG5cdHtcImZvb1wiOiB0cnVlLCBcImJhclwiOiBmYWxzZX0sXG5cdHtcImZvb1wiOiB0cnVlfSwgIyBzdWJzZXQgb2JqZWN0XG4pXG5cbnJlbW92ZWQgOj0gb2JqZWN0LnJlbW92ZShcblx0e1wiZm9vXCI6IHRydWUsIFwiYmFyXCI6IGZhbHNlfSxcblx0e1wiYmFyXCJ9LCAjIHJlbW92ZSBrZXlzXG4pXG4ifQ%3D%3D))
+Manipulate and make checks on objects. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG51bmlvbmVkIDo9IG9iamVjdC51bmlvbih7XCJmb29cIjogdHJ1ZX0sIHtcImJhclwiOiBmYWxzZX0pXG5cbnN1YnNldCA6PSBvYmplY3Quc3Vic2V0KFxuXHR7XCJmb29cIjogdHJ1ZSwgXCJiYXJcIjogZmFsc2V9LFxuXHR7XCJmb29cIjogdHJ1ZX0sICMgc3Vic2V0IG9iamVjdFxuKVxuXG5yZW1vdmVkIDo9IG9iamVjdC5yZW1vdmUoXG5cdHtcImZvb1wiOiB0cnVlLCBcImJhclwiOiBmYWxzZX0sXG5cdHtcImJhclwifSwgIyByZW1vdmUga2V5c1xuKVxuIn0%3D))
 
 
 ```rego

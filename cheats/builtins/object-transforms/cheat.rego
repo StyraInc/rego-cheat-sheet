@@ -1,6 +1,6 @@
 package cheat
 
-import future.keywords
+import rego.v1
 
 unioned := object.union({"foo": true}, {"bar": false})
 

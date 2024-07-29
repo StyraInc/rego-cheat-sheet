@@ -1,6 +1,6 @@
 package cheat
 
-import future.keywords
+import rego.v1
 
 example_string := "Build Policy as Code with OPA!"
 

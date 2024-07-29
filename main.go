@@ -35,7 +35,7 @@ type Cheat struct {
 func (c *Cheat) CodeDisplay() string {
 	code := c.Code
 	code = strings.Replace(code, "package cheat", "", 1)
-	code = strings.Replace(code, "import future.keywords", "", 1)
+	code = strings.Replace(code, "import rego.v1", "", 1)
 	code = strings.TrimSpace(code)
 
 	return code
@@ -197,7 +197,7 @@ func main() {
 		panic(err)
 	}
 
-	mdOutputFile, err := os.OpenFile(mdOutputPath, os.O_RDWR, 0644)
+	mdOutputFile, err := os.OpenFile(mdOutputPath, os.O_RDWR, 0o644)
 	if err != nil {
 		panic(err)
 	}
@@ -239,7 +239,7 @@ func main() {
 		panic(err)
 	}
 
-	texOutputFile, err := os.OpenFile(texOutputPath, os.O_RDWR, 0644)
+	texOutputFile, err := os.OpenFile(texOutputPath, os.O_RDWR, 0o644)
 	if err != nil {
 		panic(err)
 	}

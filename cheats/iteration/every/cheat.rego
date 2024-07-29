@@ -1,6 +1,6 @@
 package cheat
 
-import future.keywords
+import rego.v1
 
 allow if {
 	prefix := sprintf("/docs/%s/", [input.userID])

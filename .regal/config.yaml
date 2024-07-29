@@ -7,12 +7,6 @@ rules:
         files:
           - cheats/comprehensions/sets/cheat.rego
           - cheats/comprehensions/objects/cheat.rego
-  imports:
-    # ignore rego.v1 imports as they'd make examples more verbose.
-    use-rego-v1:
-      level: ignore
-    implicit-future-keywords:
-      level: ignore
   style:
     opa-fmt:
       ignore:

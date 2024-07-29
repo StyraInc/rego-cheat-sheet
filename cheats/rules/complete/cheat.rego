@@ -1,6 +1,6 @@
 package cheat
 
-import future.keywords
+import rego.v1
 
 default allow := false
 
@@ -12,4 +12,5 @@ allow if {
 default request_quota := 100
 
 request_quota := 1000 if input.user.internal
+
 request_quota := 50 if input.user.plan.trial

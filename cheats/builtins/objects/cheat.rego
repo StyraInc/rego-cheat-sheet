@@ -1,6 +1,6 @@
 package cheat
 
-import future.keywords
+import rego.v1
 
 obj := {"userid": "18472", "roles": [{"name": "admin"}]}
 
