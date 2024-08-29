@@ -1,5 +1,7 @@
 # Rego Cheat Sheet
 
+<!-- The source of truth for this file's contents is https://github.com/StyraInc/rego-cheat-sheet -->
+
 {{ range .Sections }}
 ## {{ .Title }} - <sub><sup>{{ .Subtitle }}</sup></sub>
 
