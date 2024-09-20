@@ -1,5 +1,15 @@
 # Rego Cheat Sheet
 
+<!-- The source of truth for this file's contents is https://github.com/StyraInc/rego-cheat-sheet -->
+
+<div style={{display: "none"}}>
+```rego
+package cheat
+import rego.v1
+```
+<RunSnippet id="preamble.rego"/>
+</div>
+
 
 ## Rules - <sub><sup>The building blocks of Rego</sup></sub>
 
@@ -9,6 +19,19 @@
 
 Complete rules assign a single value. 
  ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwicm9sZVwiOiBcImFkbWluXCIsXG4gICAgXCJpbnRlcm5hbFwiOiB0cnVlXG4gIH1cbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5kZWZhdWx0IGFsbG93IDo9IGZhbHNlXG5cbmFsbG93IGlmIHtcblx0aW5wdXQudXNlci5yb2xlID09IFwiYWRtaW5cIlxuXHRpbnB1dC51c2VyLmludGVybmFsXG59XG5cbmRlZmF1bHQgcmVxdWVzdF9xdW90YSA6PSAxMDBcblxucmVxdWVzdF9xdW90YSA6PSAxMDAwIGlmIGlucHV0LnVzZXIuaW50ZXJuYWxcblxucmVxdWVzdF9xdW90YSA6PSA1MCBpZiBpbnB1dC51c2VyLnBsYW4udHJpYWxcbiJ9))
+
+
+
+Input:
+```json
+{
+  "user": {
+    "role": "admin",
+    "internal": true
+  }
+}
+```
+<RunSnippet id="input.Complete+Rules.json"/>
 
 
 ```rego
@@ -27,14 +50,29 @@ request_quota := 50 if input.user.plan.trial
 ```
 
 
-
-
+<RunSnippet command="data.cheat" files="#input.Complete+Rules.json" depends="preamble.rego"/>
 
 
 ### Partial Rules 
 
 
 Partial rules generate and assign a set of values to a variable. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwidGVhbXNcIjogW1xuICAgICAgXCJvcHNcIixcbiAgICAgIFwiZW5nXCJcbiAgICBdXG4gIH1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCByZWdvLnYxXG5cbnBhdGhzIGNvbnRhaW5zIFwiL2hhbmRib29rLypcIlxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D))
+
+
+
+Input:
+```json
+{
+  "user": {
+    "teams": [
+      "ops",
+      "eng"
+    ]
+  }
+}
+
+```
+<RunSnippet id="input.Partial+Rules.json"/>
 
 
 ```rego
@@ -47,15 +85,7 @@ paths contains path if {
 ```
 
 
-```javascript
-// Output
-{
-  "paths": ["/handbook/*", "/teams/owl/*", "/teams/tiger/*"]
-}
-```
-
-
-
+<RunSnippet command="data.cheat" files="#input.Partial+Rules.json" depends="preamble.rego"/>
 
 
 
@@ -66,6 +96,8 @@ paths contains path if {
 
 
 Name local query variables. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5hbGxfcmVnaW9ucyA6PSB7XG5cdFwiZW1lYVwiOiB7XCJ3ZXN0XCIsIFwiZWFzdFwifSxcblx0XCJuYVwiOiB7XCJ3ZXN0XCIsIFwiZWFzdFwiLCBcImNlbnRyYWxcIn0sXG5cdFwibGF0YW1cIjoge1wid2VzdFwiLCBcImVhc3RcIn0sXG5cdFwiYXBhY1wiOiB7XCJub3J0aFwiLCBcInNvdXRoXCJ9LFxufVxuXG5hbGxvd2VkX3JlZ2lvbnMgY29udGFpbnMgcmVnaW9uX2lkIGlmIHtcblx0c29tZSBhcmVhLCByZWdpb25zIGluIGFsbF9yZWdpb25zXG5cblx0c29tZSByZWdpb24gaW4gcmVnaW9uc1xuXHRyZWdpb25faWQgOj0gc3ByaW50ZihcIiVzXyVzXCIsIFthcmVhLCByZWdpb25dKVxufVxuIn0%3D))
+
+
 
 
 ```rego
@@ -85,23 +117,27 @@ allowed_regions contains region_id if {
 ```
 
 
-```javascript
-// Output
-{
-  "allowed_regions": [
-    "apac_north", "apac_south", "emea_east", ...
-  ]
-}
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 ### Every 
 
 
 Check conditions on many elements. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJJRFwiOiBcInUxMjNcIixcbiAgXCJwYXRoc1wiOiBbXG4gICAgXCIvZG9jcy91MTIzL25vdGVzLnR4dFwiLFxuICAgIFwiL2RvY3MvdTEyMy9xNC1yZXBvcnQuZG9jeFwiXG4gIF1cbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5hbGxvdyBpZiB7XG5cdHByZWZpeCA6PSBzcHJpbnRmKFwiL2RvY3MvJXMvXCIsIFtpbnB1dC51c2VySURdKVxuXHRldmVyeSBwYXRoIGluIGlucHV0LnBhdGhzIHtcblx0XHRzdGFydHN3aXRoKHBhdGgsIHByZWZpeClcblx0fVxufVxuIn0%3D))
+
+
+
+Input:
+```json
+{
+  "userID": "u123",
+  "paths": [
+    "/docs/u123/notes.txt",
+    "/docs/u123/q4-report.docx"
+  ]
+}
+```
+<RunSnippet id="input.Every.json"/>
 
 
 ```rego
@@ -114,8 +150,7 @@ allow if {
 ```
 
 
-
-
+<RunSnippet command="data.cheat" files="#input.Every.json" depends="preamble.rego"/>
 
 
 
@@ -128,6 +163,16 @@ allow if {
 Statements in rules are joined with logical AND. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcImVtYWlsXCI6IFwiam9lQGV4YW1wbGUuY29tXCJcbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG52YWxpZF9zdGFmZl9lbWFpbCBpZiB7XG5cdHJlZ2V4Lm1hdGNoKGBeXFxTK0BcXFMrXFwuXFxTKyRgLCBpbnB1dC5lbWFpbClcblxuXHQjIGFuZFxuXHRlbmRzd2l0aChpbnB1dC5lbWFpbCwgXCJleGFtcGxlLmNvbVwiKVxufVxuIn0%3D))
 
 
+
+Input:
+```json
+{
+  "email": "joe@example.com"
+}
+```
+<RunSnippet id="input.Logical+AND.json"/>
+
+
 ```rego
 valid_staff_email if {
 	regex.match(`^\S+@\S+\.\S+$`, input.email)
@@ -138,14 +183,25 @@ valid_staff_email if {
 ```
 
 
-
-
+<RunSnippet command="data.cheat" files="#input.Logical+AND.json" depends="preamble.rego"/>
 
 
 ### Logical OR 
 
 
 Express OR with multiple rules, functions or the in keyword. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcImVtYWlsXCI6IFwib3BhQGV4YW1wbGUuY29tXCIsXG4gIFwibmFtZVwiOiBcImFubmFcIixcbiAgXCJtZXRob2RcIjogXCJHRVRcIlxufSIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCByZWdvLnYxXG5cbiMgdXNpbmcgbXVsdGlwbGUgcnVsZXNcbnZhbGlkX2VtYWlsIGlmIGVuZHN3aXRoKGlucHV0LmVtYWlsLCBcIkBleGFtcGxlLmNvbVwiKVxuXG52YWxpZF9lbWFpbCBpZiBlbmRzd2l0aChpbnB1dC5lbWFpbCwgXCJAZXhhbXBsZS5vcmdcIilcblxudmFsaWRfZW1haWwgaWYgZW5kc3dpdGgoaW5wdXQuZW1haWwsIFwiQGV4YW1wbGUubmV0XCIpXG5cbiMgdXNpbmcgZnVuY3Rpb25zXG5hbGxvd2VkX2ZpcnN0bmFtZShuYW1lKSBpZiB7XG5cdHN0YXJ0c3dpdGgobmFtZSwgXCJhXCIpXG5cdGNvdW50KG5hbWUpIFx1MDAzZSAyXG59XG5cbmFsbG93ZWRfZmlyc3RuYW1lKFwiam9lXCIpICMgaWYgbmFtZSA9PSAnam9lJ1xuXG52YWxpZF9uYW1lIGlmIHtcblx0YWxsb3dlZF9maXJzdG5hbWUoaW5wdXQubmFtZSlcbn1cblxuIyB1c2luZyBgaW5gXG52YWxpZF9yZXF1ZXN0IGlmIHtcblx0aW5wdXQubWV0aG9kIGluIHtcIkdFVFwiLCBcIlBPU1RcIn1cbn1cbiJ9))
+
+
+
+Input:
+```json
+{
+  "email": "opa@example.com",
+  "name": "anna",
+  "method": "GET"
+}
+```
+<RunSnippet id="input.Logical+OR.json"/>
 
 
 ```rego
@@ -175,15 +231,7 @@ valid_request if {
 ```
 
 
-```javascript
-// Output
-{
-  "email": "opa@example.com", "name": "anna", "method": "GET"
-}
-```
-
-
-
+<RunSnippet command="data.cheat" files="#input.Logical+OR.json" depends="preamble.rego"/>
 
 
 
@@ -196,6 +244,8 @@ valid_request if {
 Override input and data using the with keyword. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5hbGxvdyBpZiBpbnB1dC5hZG1pbiA9PSB0cnVlXG5cbnRlc3RfYWxsb3dfd2hlbl9hZG1pbiBpZiB7XG5cdGFsbG93IHdpdGggaW5wdXQgYXMge1wiYWRtaW5cIjogdHJ1ZX1cbn1cbiJ9))
 
 
+
+
 ```rego
 allow if input.admin == true
 
@@ -205,8 +255,7 @@ test_allow_when_admin if {
 ```
 
 
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 
@@ -217,6 +266,8 @@ test_allow_when_admin if {
 
 
 Use print in rules to inspect values at runtime. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5hbGxvd2VkX3VzZXJzIDo9IHtcImFsaWNlXCIsIFwiYm9iXCIsIFwiY2hhcmxpZVwifVxuXG5hbGxvdyBpZiB7XG5cdHNvbWUgdXNlciBpbiBhbGxvd2VkX3VzZXJzXG5cdHByaW50KHVzZXIpXG5cdGlucHV0LnVzZXIgPT0gdXNlclxufVxuIn0%3D))
+
+
 
 
 ```rego
@@ -230,15 +281,7 @@ allow if {
 ```
 
 
-```javascript
-// Output
-// alice
-// bob
-// charlie
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 
@@ -252,6 +295,8 @@ Produce ordered collections, maintaining duplicates.
  ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5kb3VibGVkIDo9IFttIHxcblx0c29tZSBuIGluIFsxLCAyLCAzLCAzXVxuXHRtIDo9IG4gKiAyXG5dXG4ifQ%3D%3D))
 
 
+
+
 ```rego
 doubled := [m |
 	some n in [1, 2, 3, 3]
@@ -260,15 +305,7 @@ doubled := [m |
 ```
 
 
-```javascript
-// Output
-{
-  "doubled": [2, 4, 6, 6]
-}
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 ### Sets 
@@ -276,6 +313,8 @@ doubled := [m |
 
 Produce unordered collections without duplicates.
  ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG51bmlxdWVfZG91YmxlZCBjb250YWlucyBtIGlmIHtcblx0c29tZSBuIGluIFsxMCwgMjAsIDMwLCAyMCwgMTBdXG5cdG0gOj0gbiAqIDJcbn1cbiJ9))
+
+
 
 
 ```rego
@@ -286,15 +325,7 @@ unique_doubled contains m if {
 ```
 
 
-```javascript
-// Output
-{
-  "unique_doubled": [20, 40, 60]
-}
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 ### Objects 
@@ -302,6 +333,8 @@ unique_doubled contains m if {
 
 Produce key:value data. Note, keys must be unique.
  ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5pc19ldmVuW251bWJlcl0gOj0gaXNfZXZlbiBpZiB7XG5cdHNvbWUgbnVtYmVyIGluIFsxLCAyLCAzLCA0XVxuXHRpc19ldmVuIDo9IChudW1iZXIgJSAyKSA9PSAwXG59XG4ifQ%3D%3D))
+
+
 
 
 ```rego
@@ -312,17 +345,7 @@ is_even[number] := is_even if {
 ```
 
 
-```javascript
-// Output
-{
-  "is_even": {
-    "1": false, "2": true, "3": false, "4": true
-  }
-}
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 
@@ -335,6 +358,8 @@ is_even[number] := is_even if {
 Pattern match and replace string data. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5leGFtcGxlX3N0cmluZyA6PSBcIkJ1aWxkIFBvbGljeSBhcyBDb2RlIHdpdGggT1BBIVwiXG5cbmNoZWNrX21hdGNoIGlmIHJlZ2V4Lm1hdGNoKGBcXHcrYCwgZXhhbXBsZV9zdHJpbmcpXG5cbmNoZWNrX3JlcGxhY2UgOj0gcmVnZXgucmVwbGFjZShleGFtcGxlX3N0cmluZywgYFxccytgLCBcIl9cIilcbiJ9))
 
 
+
+
 ```rego
 example_string := "Build Policy as Code with OPA!"
 
@@ -344,22 +369,15 @@ check_replace := regex.replace(example_string, `\s+`, "_")
 ```
 
 
-```javascript
-// Output
-{
-  "check_match": true,
-  "check_replace": "Build_Policy_as_Code_with_OPA!"
-}
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 ### Strings 
 
 
 Check and transform strings. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5leGFtcGxlX3N0cmluZyA6PSBcIkJ1aWxkIFBvbGljeSBhcyBDb2RlIHdpdGggT1BBIVwiXG5cbmNoZWNrX2NvbnRhaW5zIGlmIGNvbnRhaW5zKGV4YW1wbGVfc3RyaW5nLCBcIk9QQVwiKVxuY2hlY2tfc3RhcnRzd2l0aCBpZiBzdGFydHN3aXRoKGV4YW1wbGVfc3RyaW5nLCBcIkJ1aWxkXCIpXG5jaGVja19lbmRzd2l0aCBpZiBlbmRzd2l0aChleGFtcGxlX3N0cmluZywgXCIhXCIpXG5jaGVja19yZXBsYWNlIDo9IHJlcGxhY2UoZXhhbXBsZV9zdHJpbmcsIFwiT1BBXCIsIFwiU3R5cmFcIilcbmNoZWNrX3NwcmludGYgOj0gc3ByaW50ZihcIk9QQSBpcyAlcyFcIiwgW1wiYXdlc29tZVwiXSlcbiJ9))
+
+
 
 
 ```rego
@@ -373,25 +391,15 @@ check_sprintf := sprintf("OPA is %s!", ["awesome"])
 ```
 
 
-```javascript
-// Output
-{
-  "check_contains": true,
-  "check_startswith": true,
-  "check_endswith": true,
-  "check_replace": "Build Policy as Code with Styra!",
-  "check_sprintf": "OPA is awesome!"
-}
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 ### Aggregates 
 
 
 Summarize data. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG52YWxzIDo9IFs1LCAxLCA0LCAyLCAzXVxudmFsc19jb3VudCA6PSBjb3VudCh2YWxzKVxudmFsc19tYXggOj0gbWF4KHZhbHMpXG52YWxzX21pbiA6PSBtaW4odmFscylcbnZhbHNfc29ydGVkIDo9IHNvcnQodmFscylcbnZhbHNfc3VtIDo9IHN1bSh2YWxzKVxuIn0%3D))
+
+
 
 
 ```rego
@@ -404,25 +412,15 @@ vals_sum := sum(vals)
 ```
 
 
-```javascript
-// Output
-{
-  "vals_count": 5,
-  "vals_max": 5,
-  "vals_min": 1,
-  "vals_sorted": [1, 2, 3, 4, 5],
-  "vals_sum": 15
-}
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 ### Objects: Extracting Data 
 
 
 Work with key value and nested data. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5vYmogOj0ge1widXNlcmlkXCI6IFwiMTg0NzJcIiwgXCJyb2xlc1wiOiBbe1wibmFtZVwiOiBcImFkbWluXCJ9XX1cblxuIyBwYXRocyBjYW4gY29udGFpbiBhcnJheSBpbmRleGVzIHRvb1xudmFsIDo9IG9iamVjdC5nZXQob2JqLCBbXCJyb2xlc1wiLCAwLCBcIm5hbWVcIl0sIFwibWlzc2luZ1wiKVxuXG5kZWZhdWx0ZWRfdmFsIDo9IG9iamVjdC5nZXQoXG5cdG9iaixcblx0W1wicm9sZXNcIiwgMCwgXCJwZXJtaXNzaW9uc1wiXSwgIyBwYXRoXG5cdFwidW5rbm93blwiLCAjIGRlZmF1bHQgaWYgcGF0aCBpcyBtaXNzaW5nXG4pXG5cbmtleXMgOj0gb2JqZWN0LmtleXMob2JqKVxuIn0%3D))
+
+
 
 
 ```rego
@@ -441,24 +439,15 @@ keys := object.keys(obj)
 ```
 
 
-```javascript
-// Output
-{
-  "val": "admin",
-  "defaulted_val": "unknown",
-
-  "keys": ["roles", "userid"]
-}
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 ### Objects: Transforming Data 
 
 
 Manipulate and make checks on objects. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie30iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG51bmlvbmVkIDo9IG9iamVjdC51bmlvbih7XCJmb29cIjogdHJ1ZX0sIHtcImJhclwiOiBmYWxzZX0pXG5cbnN1YnNldCA6PSBvYmplY3Quc3Vic2V0KFxuXHR7XCJmb29cIjogdHJ1ZSwgXCJiYXJcIjogZmFsc2V9LFxuXHR7XCJmb29cIjogdHJ1ZX0sICMgc3Vic2V0IG9iamVjdFxuKVxuXG5yZW1vdmVkIDo9IG9iamVjdC5yZW1vdmUoXG5cdHtcImZvb1wiOiB0cnVlLCBcImJhclwiOiBmYWxzZX0sXG5cdHtcImJhclwifSwgIyByZW1vdmUga2V5c1xuKVxuIn0%3D))
+
+
 
 
 ```rego
@@ -476,17 +465,7 @@ removed := object.remove(
 ```
 
 
-```javascript
-// Output
-{
-  "removed": { "foo": true },
-  "subset": true,
-  "unioned": { "bar": false, "foo": true }
-}
-```
-
-
-
+<RunSnippet command="data.cheat" depends="preamble.rego"/>
 
 
 
