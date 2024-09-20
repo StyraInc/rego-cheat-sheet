@@ -1,5 +1,7 @@
 rules:
   idiomatic:
+    directory-package-mismatch:
+      level: ignore # we don't have file names for code snippets
     no-defined-entrypoint:
       level: ignore
     prefer-set-or-object-rule:
