@@ -2,13 +2,13 @@
 
 <!-- The source of truth for this file's contents is https://github.com/StyraInc/rego-cheat-sheet -->
 
-<div style={{display: "none"}}>
+All code examples on this page share this preamble:
+
 ```rego
 package cheat
 import rego.v1
 ```
 <RunSnippet id="preamble.rego"/>
-</div>
 
 
 ## Rules - <sub><sup>The building blocks of Rego</sup></sub>
