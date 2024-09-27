@@ -23,8 +23,7 @@ import rego.v1
 {{ end }}
 
 {{ if ne .Input "" }}
-Input:
-```json
+```json title="input.json"
 {{ .Input }}
 ```
 <RunSnippet id="input.{{.Title | urlquery}}.json"/>
