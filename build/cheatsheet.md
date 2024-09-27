@@ -68,7 +68,6 @@ Partial rules generate and assign a set of values to a variable. ([Try It](https
     ]
   }
 }
-
 ```
 <RunSnippet id="input.Partial+Rules.json"/>
 
