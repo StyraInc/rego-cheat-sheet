@@ -1,0 +1,1 @@
+Partial rules generate and assign a set of values to a variable.

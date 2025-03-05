@@ -1,0 +1,1 @@
+Partial object rules generate and assign a set of keys and values to a variable.

@@ -1,0 +1,7 @@
+{
+  "paths_by_prefix": {
+    "a": ["a/123.txt", "a/456.txt"],
+    "b": ["b/bar.txt", "b/foo.txt"],
+    "c": ["c/x.txt"]
+  }
+}

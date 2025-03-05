@@ -53,10 +53,11 @@ request_quota := 50 if input.user.plan.trial
 <RunSnippet command="data.cheat" files="#input.Complete+Rules.json" depends="preamble.rego"/>
 
 
-### Partial Rules 
+### Partial Set Rules 
 
 
-Partial rules generate and assign a set of values to a variable. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwidGVhbXNcIjogW1xuICAgICAgXCJvcHNcIixcbiAgICAgIFwiZW5nXCJcbiAgICBdXG4gIH1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCByZWdvLnYxXG5cbnBhdGhzIGNvbnRhaW5zIFwiL2hhbmRib29rLypcIlxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D))
+Partial rules generate and assign a set of values to a variable.
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwidGVhbXNcIjogW1xuICAgICAgXCJvcHNcIixcbiAgICAgIFwiZW5nXCJcbiAgICBdXG4gIH1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCByZWdvLnYxXG5cbnBhdGhzIGNvbnRhaW5zIFwiL2hhbmRib29rLypcIlxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D))
 
 
 
@@ -72,7 +73,7 @@ Input:
 }
 
 ```
-<RunSnippet id="input.Partial+Rules.json"/>
+<RunSnippet id="input.Partial+Set+Rules.json"/>
 
 
 ```rego
@@ -85,7 +86,44 @@ paths contains path if {
 ```
 
 
-<RunSnippet command="data.cheat" files="#input.Partial+Rules.json" depends="preamble.rego"/>
+<RunSnippet command="data.cheat" files="#input.Partial+Set+Rules.json" depends="preamble.rego"/>
+
+
+### Partial Object Rules 
+
+
+Partial object rules generate and assign a set of keys and values to a variable.
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInBhdGhzXCI6IFtcbiAgICBcImEvMTIzLnR4dFwiLFxuICAgIFwiYS80NTYudHh0XCIsXG4gICAgXCJiL2Zvby50eHRcIixcbiAgICBcImIvYmFyLnR4dFwiLFxuICAgIFwiYy94LnR4dFwiXG4gIF1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCByZWdvLnYxXG5cbiMgQ3JlYXRlcyBhbiBvYmplY3Qgd2l0aCBzZXRzIGFzIHRoZSB2YWx1ZXMuXG5wYXRoc19ieV9wcmVmaXhbcHJlZml4XSBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSBwYXRoIGluIGlucHV0LnBhdGhzXG5cdHBhcnRzIDo9IHNwbGl0KHBhdGgsIFwiL1wiKVxuXHRwcmVmaXggOj0gcGFydHNbMF1cbn1cbiJ9))
+
+
+
+Input:
+```json
+{
+  "paths": [
+    "a/123.txt",
+    "a/456.txt",
+    "b/foo.txt",
+    "b/bar.txt",
+    "c/x.txt"
+  ]
+}
+
+```
+<RunSnippet id="input.Partial+Object+Rules.json"/>
+
+
+```rego
+# Creates an object with sets as the values.
+paths_by_prefix[prefix] contains path if {
+	some path in input.paths
+	parts := split(path, "/")
+	prefix := parts[0]
+}
+```
+
+
+<RunSnippet command="data.cheat" files="#input.Partial+Object+Rules.json" depends="preamble.rego"/>
 
 
 

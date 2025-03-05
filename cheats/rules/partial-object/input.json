@@ -1,0 +1,9 @@
+{
+  "paths": [
+    "a/123.txt",
+    "a/456.txt",
+    "b/foo.txt",
+    "b/bar.txt",
+    "c/x.txt"
+  ]
+}
