@@ -1,2 +1,2 @@
-Multi-value rules can generate and assign a set of keys and values to a variable.
+Multi-value object rules generate and assign a set of keys and values to a variable.
 In older documentation these are sometimes referred to as "partial object rules".

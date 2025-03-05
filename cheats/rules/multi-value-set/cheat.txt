@@ -1,2 +1,2 @@
-Multi-value rules generate and assign a set of values to a variable.
+Multi-value set rules generate and assign a set of values to a variable.
 In older documentation these are sometimes referred to as "partial set rules".
