@@ -56,7 +56,7 @@ request_quota := 50 if input.user.plan.trial
 ### Multi-Value Set Rules 
 
 
-Multi-value rules generate and assign a set of values to a variable.
+Multi-value set rules generate and assign a set of values to a variable.
 In older documentation these are sometimes referred to as "partial set rules". ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwidGVhbXNcIjogW1xuICAgICAgXCJvcHNcIixcbiAgICAgIFwiZW5nXCJcbiAgICBdXG4gIH1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbnBhdGhzIGNvbnRhaW5zIFwiL2hhbmRib29rLypcIlxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D))
 
 
@@ -92,7 +92,7 @@ paths contains path if {
 ### Multi-Value Object Rules 
 
 
-Multi-value rules can generate and assign a set of keys and values to a variable.
+Multi-value object rules generate and assign a set of keys and values to a variable.
 In older documentation these are sometimes referred to as "partial object rules".
  ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInBhdGhzXCI6IFtcbiAgICBcImEvMTIzLnR4dFwiLFxuICAgIFwiYS80NTYudHh0XCIsXG4gICAgXCJiL2Zvby50eHRcIixcbiAgICBcImIvYmFyLnR4dFwiLFxuICAgIFwiYy94LnR4dFwiXG4gIF1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbiMgQ3JlYXRlcyBhbiBvYmplY3Qgd2l0aCBzZXRzIGFzIHRoZSB2YWx1ZXMuXG5wYXRoc19ieV9wcmVmaXhbcHJlZml4XSBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSBwYXRoIGluIGlucHV0LnBhdGhzXG5cdHBhcnRzIDo9IHNwbGl0KHBhdGgsIFwiL1wiKVxuXHRwcmVmaXggOj0gcGFydHNbMF1cbn1cbiJ9))
 
