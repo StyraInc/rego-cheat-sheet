@@ -1,0 +1,2 @@
+Single-value rules assign a single value. 
+In older documentation, these are sometimes referred to as "complete rules".

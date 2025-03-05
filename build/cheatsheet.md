@@ -14,11 +14,11 @@ import rego.v1
 ## Rules - <sub><sup>The building blocks of Rego</sup></sub>
 
 
-### Complete Rules 
+### Single-Value Rules 
 
 
-Complete rules assign a single value. 
- ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwicm9sZVwiOiBcImFkbWluXCIsXG4gICAgXCJpbnRlcm5hbFwiOiB0cnVlXG4gIH1cbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5pbXBvcnQgcmVnby52MVxuXG5kZWZhdWx0IGFsbG93IDo9IGZhbHNlXG5cbmFsbG93IGlmIHtcblx0aW5wdXQudXNlci5yb2xlID09IFwiYWRtaW5cIlxuXHRpbnB1dC51c2VyLmludGVybmFsXG59XG5cbmRlZmF1bHQgcmVxdWVzdF9xdW90YSA6PSAxMDBcblxucmVxdWVzdF9xdW90YSA6PSAxMDAwIGlmIGlucHV0LnVzZXIuaW50ZXJuYWxcblxucmVxdWVzdF9xdW90YSA6PSA1MCBpZiBpbnB1dC51c2VyLnBsYW4udHJpYWxcbiJ9))
+Single-value rules assign a single value. 
+In older documentation, these are sometimes referred to as "complete rules". ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwicm9sZVwiOiBcImFkbWluXCIsXG4gICAgXCJpbnRlcm5hbFwiOiB0cnVlXG4gIH1cbn0iLCJwIjoicGFja2FnZSBjaGVhdFxuXG5kZWZhdWx0IGFsbG93IDo9IGZhbHNlXG5cbmFsbG93IGlmIHtcblx0aW5wdXQudXNlci5yb2xlID09IFwiYWRtaW5cIlxuXHRpbnB1dC51c2VyLmludGVybmFsXG59XG5cbmRlZmF1bHQgcmVxdWVzdF9xdW90YSA6PSAxMDBcblxucmVxdWVzdF9xdW90YSA6PSAxMDAwIGlmIGlucHV0LnVzZXIuaW50ZXJuYWxcblxucmVxdWVzdF9xdW90YSA6PSA1MCBpZiBpbnB1dC51c2VyLnBsYW4udHJpYWxcbiJ9))
 
 
 
@@ -31,7 +31,7 @@ Input:
   }
 }
 ```
-<RunSnippet id="input.Complete+Rules.json"/>
+<RunSnippet id="input.Single-Value+Rules.json"/>
 
 
 ```rego
@@ -50,13 +50,14 @@ request_quota := 50 if input.user.plan.trial
 ```
 
 
-<RunSnippet command="data.cheat" files="#input.Complete+Rules.json" depends="preamble.rego"/>
+<RunSnippet command="data.cheat" files="#input.Single-Value+Rules.json" depends="preamble.rego"/>
 
 
-### Partial Rules 
+### Multi-Value Set Rules 
 
 
-Partial rules generate and assign a set of values to a variable. ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwidGVhbXNcIjogW1xuICAgICAgXCJvcHNcIixcbiAgICAgIFwiZW5nXCJcbiAgICBdXG4gIH1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbmltcG9ydCByZWdvLnYxXG5cbnBhdGhzIGNvbnRhaW5zIFwiL2hhbmRib29rLypcIlxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D))
+Multi-value set rules generate and assign a set of values to a variable.
+In older documentation these are sometimes referred to as "partial set rules". ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInVzZXJcIjoge1xuICAgIFwidGVhbXNcIjogW1xuICAgICAgXCJvcHNcIixcbiAgICAgIFwiZW5nXCJcbiAgICBdXG4gIH1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbnBhdGhzIGNvbnRhaW5zIFwiL2hhbmRib29rLypcIlxuXG5wYXRocyBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSB0ZWFtIGluIGlucHV0LnVzZXIudGVhbXNcblx0cGF0aCA6PSBzcHJpbnRmKFwiL3RlYW1zLyV2LypcIiwgW3RlYW1dKVxufVxuIn0%3D))
 
 
 
@@ -72,7 +73,7 @@ Input:
 }
 
 ```
-<RunSnippet id="input.Partial+Rules.json"/>
+<RunSnippet id="input.Multi-Value+Set+Rules.json"/>
 
 
 ```rego
@@ -85,7 +86,45 @@ paths contains path if {
 ```
 
 
-<RunSnippet command="data.cheat" files="#input.Partial+Rules.json" depends="preamble.rego"/>
+<RunSnippet command="data.cheat" files="#input.Multi-Value+Set+Rules.json" depends="preamble.rego"/>
+
+
+### Multi-Value Object Rules 
+
+
+Multi-value object rules generate and assign a set of keys and values to a variable.
+In older documentation these are sometimes referred to as "partial object rules".
+ ([Try It](https://play.openpolicyagent.org/?state=eyJpIjoie1xuICBcInBhdGhzXCI6IFtcbiAgICBcImEvMTIzLnR4dFwiLFxuICAgIFwiYS80NTYudHh0XCIsXG4gICAgXCJiL2Zvby50eHRcIixcbiAgICBcImIvYmFyLnR4dFwiLFxuICAgIFwiYy94LnR4dFwiXG4gIF1cbn1cbiIsInAiOiJwYWNrYWdlIGNoZWF0XG5cbiMgQ3JlYXRlcyBhbiBvYmplY3Qgd2l0aCBzZXRzIGFzIHRoZSB2YWx1ZXMuXG5wYXRoc19ieV9wcmVmaXhbcHJlZml4XSBjb250YWlucyBwYXRoIGlmIHtcblx0c29tZSBwYXRoIGluIGlucHV0LnBhdGhzXG5cdHBhcnRzIDo9IHNwbGl0KHBhdGgsIFwiL1wiKVxuXHRwcmVmaXggOj0gcGFydHNbMF1cbn1cbiJ9))
+
+
+
+Input:
+```json
+{
+  "paths": [
+    "a/123.txt",
+    "a/456.txt",
+    "b/foo.txt",
+    "b/bar.txt",
+    "c/x.txt"
+  ]
+}
+
+```
+<RunSnippet id="input.Multi-Value+Object+Rules.json"/>
+
+
+```rego
+# Creates an object with sets as the values.
+paths_by_prefix[prefix] contains path if {
+	some path in input.paths
+	parts := split(path, "/")
+	prefix := parts[0]
+}
+```
+
+
+<RunSnippet command="data.cheat" files="#input.Multi-Value+Object+Rules.json" depends="preamble.rego"/>
 
 
 

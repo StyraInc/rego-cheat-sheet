@@ -1,7 +1,5 @@
 package cheat
 
-import rego.v1
-
 paths contains "/handbook/*"
 
 paths contains path if {
