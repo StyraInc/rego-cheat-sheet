@@ -49,7 +49,7 @@
     breakatwhitespace=false,
     breaklines=true,
     frame=single,
-    captionpos=b,
+    captionpos=t,
     keepspaces=true,
     numbers=none,
     numbersep=5pt,
@@ -64,47 +64,53 @@
 contains, default, startswith, endswith, replace, sprintf, regex, replace, object, get, print, as, with, match, some
 },emphstyle={\color{magenta}}
 }
+\usepackage{caption}
+\captionsetup[lstlisting]{labelformat=empty,justification=raggedright, singlelinecheck=false, font=footnotesize}
 
+\newcommand{\tryitlink}[2]{\footnotesize{#1 (\href{#2}{Try It})}}
+
+\raggedbottom
 \begin{document}
 \pagestyle{logo}
 \title{Rego Cheat Sheet}
 
 \maketitle
-\vspace{-1em}
 
 {{ range .Sections }}
-
-{{ if .PageBreak }}
-\newpage
-{{ end}}
-
+\vspace{-1em}
 \section*{{ "{" }}{{ .Title }} \raisebox{.2ex}{{ "{" }}\footnotesize{{ "{" }} \normalfont \vspace*{-10pt} {{ .Subtitle }} {{ "}" }} {{ "}" }} {{ "}" }}
 
 {{ range .Cheats }}
-\vspace{-0.5em}
 \vbox{%
-
 \subsubsection*{{ "{" }}{{ .Title }}{{ "}" }}
+\vspace{-0.5em}
 
-{{ if ne .Text "" }}
-\footnotesize{{ "{" }}{{ .Text }} (\href{{ "{" }}{{ .PlaygroundLink }}{{ "}{" }}Try It{{ "}" }}){{ "}" }}
-{{ else }}
-\footnotesize{{ "{" }}\href{{ "{" }}{{ .PlaygroundLink }}{{ "}{" }}Try It{{ "}" }}{{ "}" }}
-{{ end }}
+\newcommand{\cheatText}{
+	{{.Text}}
+}
+\newcommand{\cheatLink}{
+	{{.PlaygroundLink }}
+}
+
+\footnotesize{\tryitlink{\cheatText}{\cheatLink}}
+
+\let\cheatLink\undefined
+\let\cheatText\undefined
 
 \begin{lstlisting}[language=Ruby]
 {{ .CodeDisplay }}
 \end{lstlisting}
 
-
 {{ if and (ne .Output "") (not .TexHideOutput) }}
-\textbf{\tiny{(Output)}}
-\begin{lstlisting}[language=Ruby]
+\vspace{-1em}
+\begin{lstlisting}[language=Ruby,caption=Output]
 {{ .Output }}
 \end{lstlisting}
 {{ end }}
-
 {{ "}" }}
+
+\goodbreak
+
 {{ end }}
 {{ end }}
 
